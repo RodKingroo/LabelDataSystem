@@ -44,18 +44,6 @@ namespace LabelBaseSys
             }
         }
 
-        private IList<ARManager> _arManager;
-        public IList<ARManager> ARManager
-        {
-            get => _arManager;
-            set
-            {
-                if (value == _arManager) return;
-                _arManager = value;
-                OnPropertyChanged();
-            }
-        }
-
         private RelayCommand _addPersonButton;
         public RelayCommand AddPersonButton
         {
