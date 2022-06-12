@@ -28,41 +28,41 @@
                     </Grid.RowDefinitions>
                     <DataGrid Grid.Column="1" Grid.Row="3" Margin="5" AutoGenerateColumns="False" ItemsSource="{Binding Musics}" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Path=MusicID}"/>
-                            <DataGridTextColumn Header="Название" Binding="{Binding Path=MusicTitle}"/>
-                            <DataGridTextColumn Header="Цена" Binding="{Binding Path=MusicPrice}"/>
-                            <DataGridTextColumn Header="Количество Прослушиваний" Binding="{Binding Path=MusicCountAudition}"/>
-                            <DataGridTextColumn Header="Количество продаж" Binding="{Binding Path=MusicCountSell}"/>
-                            <DataGridTextColumn Header="Дата Записи" Binding="{Binding Path=MusicDataRec}"/>
-                            <DataGridTextColumn Header="Дата релиза" Binding="{Binding Path=MusicDataRealise}"/>
-                            <DataGridCheckBoxColumn Header="Радио" Binding="{Binding Path=MusicEnableRadio}"/>
-                            <DataGridCheckBoxColumn Header="Магазины" Binding="{Binding Path=MusicPresenceInStores}"/>
-                            <DataGridTextColumn Header="Внешний лейбл" Binding="{Binding Path=MusicAddContract}"/>
-                            <DataGridTextColumn Header="Затраты" Binding="{Binding Path=MusicExpens}"/>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Path=MusicID}" Width="auto"/>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Path=MusicTitle}" Width="auto"/>
+                            <DataGridTextColumn Header="Цена" Binding="{Binding Path=MusicPrice}" Width="auto"/>
+                            <DataGridTextColumn Header="Количество Прослушиваний" Binding="{Binding Path=MusicCountAudition}" Width="auto"/>
+                            <DataGridTextColumn Header="Количество продаж" Binding="{Binding Path=MusicCountSell}" Width="auto"/>
+                            <DataGridTextColumn Header="Дата Записи" Binding="{Binding Path=MusicDataRec}" Width="auto"/>
+                            <DataGridTextColumn Header="Дата релиза" Binding="{Binding Path=MusicDataRealise}" Width="auto"/>
+                            <DataGridCheckBoxColumn Header="Радио" Binding="{Binding Path=MusicEnableRadio}" Width="auto"/>
+                            <DataGridCheckBoxColumn Header="Магазины" Binding="{Binding Path=MusicPresenceInStores}" Width="auto"/>
+                            <DataGridTextColumn Header="Внешний лейбл" Binding="{Binding Path=MusicAddContract}" Width="auto"/>
+                            <DataGridTextColumn Header="Затраты" Binding="{Binding Path=MusicExpens}" Width="auto"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <DataGrid Grid.Column="1" Grid.Row="0" Margin="5" AutoGenerateColumns="False" ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedPerson}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding PersonID}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Псевдоним" Binding="{Binding PersonNickname}"/>
-                            <DataGridTextColumn Header="Имя" Binding="{Binding PersonFirstname}"/>
-                            <DataGridTextColumn Header="Фамилия" Binding="{Binding PersonSecondname}"/>
-                            <DataGridTextColumn Header="Контакт" Binding="{Binding PersonContact}"/>
-                            <DataGridCheckBoxColumn Header="Участник" Binding="{Binding PersonLabelMember}"/>
-                            <DataGridTextColumn Header="Пригласивший" Binding="{Binding PersonFoundByWhom}"/>
-                            <DataGridTextColumn Header="Контракт" Binding="{Binding PersonContract}"/>
+                            <DataGridTextColumn Header="ID" Binding="{Binding PersonID}" IsReadOnly="True" Width="auto"/>
+                            <DataGridTextColumn Header="Псевдоним" Binding="{Binding PersonNickname}" Width="auto"/>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding PersonFirstname}" Width="auto"/>
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding PersonSecondname}" Width="auto"/>
+                            <DataGridTextColumn Header="Контакт" Binding="{Binding PersonContact}" Width="auto"/>
+                            <DataGridCheckBoxColumn Header="Участник" Binding="{Binding PersonLabelMember}" Width="auto"/>
+                            <DataGridTextColumn Header="Пригласивший" Binding="{Binding PersonFoundByWhom}" Width="auto"/>
+                            <DataGridTextColumn Header="Контракт" Binding="{Binding PersonContract}" Width="auto"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
                     <DataGrid Grid.Column="1" Grid.Row="1" Margin="5" AutoGenerateColumns="False" ItemsSource="{Binding ContractWithPersons}" SelectedItem="{Binding SelectedContractWithPerson}" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding ContractWithPersonID}" IsReadOnly="True"/>
-                            <DataGridCheckBoxColumn Header="Активность" Binding="{Binding EnableContractWithPerson}"/>
-                            <DataGridTextColumn Header="Дата подписния" Binding="{Binding DataOfSignContractWithPerson}"/>
-                            <DataGridTextColumn Header="Треки по контракта" Binding="{Binding CountTrackUnderContractWithPerson}"/>
-                            <DataGridTextColumn Header="Выполнено" Binding="{Binding CountTrackFinishContractWithPerson}"/>
-                            <DataGridTextColumn Header="Дата окончания" Binding="{Binding DataDeadlineContractWithPerson}"/>
-                            <DataGridTextColumn Header="Прайс контракта" Binding="{Binding PriceContractWithPerson}"/>
+                            <DataGridTextColumn Header="ID" Binding="{Binding ContractWithPersonID}" IsReadOnly="True" Width="auto"/>
+                            <DataGridCheckBoxColumn Header="Активность" Binding="{Binding EnableContractWithPerson}" Width="auto"/>
+                            <DataGridTextColumn Header="Дата подписния" Binding="{Binding DataOfSignContractWithPerson}" Width="auto"/>
+                            <DataGridTextColumn Header="Треки по контракта" Binding="{Binding CountTrackUnderContractWithPerson}" Width="auto"/>
+                            <DataGridTextColumn Header="Выполнено" Binding="{Binding CountTrackFinishContractWithPerson}" Width="auto"/>
+                            <DataGridTextColumn Header="Дата окончания" Binding="{Binding DataDeadlineContractWithPerson}" Width="auto"/>
+                            <DataGridTextColumn Header="Прайс контракта" Binding="{Binding PriceContractWithPerson}" Width="auto"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Grid Grid.Column="0" Grid.Row="0" Margin="5,5,5,30" DataContext="{Binding SelectedPersons}">
@@ -140,7 +140,47 @@
             </TabItem>
             <TabItem Header="AR Менеджер">
                 <Grid>
-                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="1" Margin="5,5,5,30" DataContext="{Binding SelectedARManagers}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="ID: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Имя: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="4" Text="Фамилия: " TextAlignment="Right"/>
+
+                        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding ARManagerID}" IsReadOnly="True"/>
+                        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding ARManagerFirstname}"/>
+                        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding ARManagerSecondname}"/>
+                    </Grid>
+                    <Button Grid.Column="0" Grid.Row="1" Margin="5,0,0,5" Content="Добавить" Command="{Binding AddARManagerButton}" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="89"/>
+                    <Button Grid.Column="0" Grid.Row="1" Margin="99,0,0,5" Content="Удалить" Command="{Binding RemoveARManagerButton}" HorizontalAlignment="Left" Width="89" Height="20" VerticalAlignment="Bottom"/>
+                    <DataGrid Grid.Column="1" Margin="5" Grid.RowSpan="3" AutoGenerateColumns="False" ItemsSource="{Binding ARManagers}" SelectedItem="{Binding SelectedARManagers}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding ARManagerID}" Width="auto"/>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding ARManagerFirstname}" Width="auto"/>
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding ARManagerSecondname}" Width="auto"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>

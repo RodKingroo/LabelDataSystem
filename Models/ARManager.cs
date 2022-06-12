@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace LabelSystem.Models
+namespace LabelBaseSys.Models
 {
     public class ARManager : INotifyPropertyChanged
     {
 
         private int _arManagerID;
-        public int PK_ARManagerID
+        public int ARManagerID
         {
             get => _arManagerID;
             set
@@ -19,7 +19,7 @@ namespace LabelSystem.Models
         }
 
         private string _firstName;
-        public string FirstName
+        public string ARManagerFirstname
         {
             get => _firstName;
             set
@@ -31,7 +31,7 @@ namespace LabelSystem.Models
         }
 
         private string _secondName;
-        public string SecondName
+        public string ARManagerSecondname
         {
             get => _secondName;
             set
