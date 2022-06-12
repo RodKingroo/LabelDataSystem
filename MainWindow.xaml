@@ -28,7 +28,7 @@
                     </Grid.RowDefinitions>
                     <DataGrid Grid.Column="1" Grid.Row="3" Margin="5" AutoGenerateColumns="False" ItemsSource="{Binding Musics}" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Path=MusicID}" Width="auto"/>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Path=MusicID}" IsReadOnly="True" Width="auto"/>
                             <DataGridTextColumn Header="Название" Binding="{Binding Path=MusicTitle}" Width="auto"/>
                             <DataGridTextColumn Header="Цена" Binding="{Binding Path=MusicPrice}" Width="auto"/>
                             <DataGridTextColumn Header="Количество Прослушиваний" Binding="{Binding Path=MusicCountAudition}" Width="auto"/>
@@ -43,11 +43,11 @@
                     </DataGrid>
                     <DataGrid Grid.Column="1" Grid.Row="0" Margin="5" AutoGenerateColumns="False" ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedPerson}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding PersonID}" IsReadOnly="True" Width="auto"/>
+                            <DataGridTextColumn Header="ID" Binding="{Binding PersonID}" Width="auto"/>
                             <DataGridTextColumn Header="Псевдоним" Binding="{Binding PersonNickname}" Width="auto"/>
                             <DataGridTextColumn Header="Имя" Binding="{Binding PersonFirstname}" Width="auto"/>
                             <DataGridTextColumn Header="Фамилия" Binding="{Binding PersonSecondname}" Width="auto"/>
-                            <DataGridTextColumn Header="Контакт" Binding="{Binding PersonContact}" Width="auto"/>
+                            <DataGridTextColumn Header="E-Mail" Binding="{Binding PersonContact}" Width="auto"/>
                             <DataGridCheckBoxColumn Header="Участник" Binding="{Binding PersonLabelMember}" Width="auto"/>
                             <DataGridTextColumn Header="Пригласивший" Binding="{Binding PersonFoundByWhom}" Width="auto"/>
                             <DataGridTextColumn Header="Контракт" Binding="{Binding PersonContract}" Width="auto"/>
@@ -65,7 +65,7 @@
                             <DataGridTextColumn Header="Прайс контракта" Binding="{Binding PriceContractWithPerson}" Width="auto"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Grid Grid.Column="0" Grid.Row="0" Margin="5,5,5,30" DataContext="{Binding SelectedPersons}">
+                    <Grid Grid.Column="0" Grid.Row="0" Margin="5,5,5,30" DataContext="{Binding SelectedPerson}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -97,7 +97,7 @@
                         <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding PersonContact, UpdateSourceTrigger=PropertyChanged}"/>
                         <CheckBox Grid.Column="1" Grid.Row="5" IsChecked="{Binding PersonLabelMember}"/>
                         <ComboBox Grid.Column="1" Grid.Row="6" Name="ComboBoxARManager"/>
-                        <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding PersonContract, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                        <ComboBox Grid.Column="1" Grid.Row="7" Name="PersonContract"/>
                     </Grid>
                     <Button Margin="5,0,0,5" Content="Добавить" Command="{Binding AddPersonButton}" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="89"/>
                     <Button Margin="99,0,0,5" Content="Удалить" Command="{Binding RemovePersonButton}" HorizontalAlignment="Left" Width="89" Height="20" VerticalAlignment="Bottom"/>
