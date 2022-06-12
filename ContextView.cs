@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +15,9 @@ namespace LabelBaseSys
 {
     public class ContextView : INotifyPropertyChanged
     {
-        public ObservableCollection<ARManager> ARManagers { get; set; }
+
+
+        public ObservableCollection<ARManager> ARManagers { get; }
 
         private ARManager _selectedARManagers;
         public ARManager SelectedARManagers
@@ -34,19 +38,42 @@ namespace LabelBaseSys
             {
                 return _addARManagerButton ?? (_addARManagerButton = new RelayCommand(obj =>
                 {
+                    
                     ARManager arm = new ARManager();
+                    arm.ARManagerID = ARManagers.Count+1;
                     ARManagers.Insert(ARManagers.Count, arm);
                     SelectedARManagers = arm;
                 }));
             }
         }
 
+        private RelayCommand _saveBase;
+        public RelayCommand SaveBase
+        {
+            get
+            {
+                return _saveBase ?? (_saveBase = new RelayCommand(obj =>
+                {
+                    Coderin сoderin = new Coderin();
+                    var direct = AppDomain.CurrentDomain.BaseDirectory;
+                    var ARMans = $"base/ARMans.lbs";
+                    var path = Path.Combine(direct, ARMans);
+                    ushort key = 0x1950;
+                    StreamWriter sw = new StreamWriter(path, false);
+                    foreach(ARManager item in ARManagers)
+                    {
+                        string sandwich = $"{Convert.ToString(item.ARManagerID)}-{item.ARManagerFirstname}-{item.ARManagerSecondname}";
+                        sandwich = сoderin.EncodDestruct(sandwich, key);
+                        sw.WriteLine(sandwich);
+                    }
+                    sw.Close();
+                }));
+            }
+        }
+
         public ContextView()
         {
-            ARManagers = new ObservableCollection<ARManager>
-            {
-
-            };
+            ARManagers = new ObservableCollection<ARManager> { };
         }
 
 
