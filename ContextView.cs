@@ -58,11 +58,11 @@ namespace LabelBaseSys
                     var direct = AppDomain.CurrentDomain.BaseDirectory;
                     var ARMans = $"base/ARMans.lbs";
                     var path = Path.Combine(direct, ARMans);
-                    ushort key = 0x1950;
+                    ushort key = 0x6010;
                     StreamWriter sw = new StreamWriter(path, false);
                     foreach(ARManager item in ARManagers)
                     {
-                        string sandwich = $"{Convert.ToString(item.ARManagerID)}-{item.ARManagerFirstname}-{item.ARManagerSecondname}";
+                        string sandwich = $"{Convert.ToString(item.ARManagerID)};{item.ARManagerFirstname};{item.ARManagerSecondname};";
                         sandwich = сoderin.EncodDestruct(sandwich, key);
                         sw.WriteLine(sandwich);
                     }
@@ -74,6 +74,27 @@ namespace LabelBaseSys
         public ContextView()
         {
             ARManagers = new ObservableCollection<ARManager> { };
+
+            Coderin coderin = new Coderin();
+            var direct = AppDomain.CurrentDomain.BaseDirectory;
+            var ARMans = $"base/ARMans.lbs";
+            var path = Path.Combine(direct, ARMans);
+            StreamReader sr = new StreamReader(path);
+            string line; ushort key = 0x6010;
+            while ((line = sr.ReadLine()) != null)
+            {
+                line = coderin.EncodDestruct(line, key);
+                string[] word = line.Split(';');
+                var arm = new ARManager()
+                {
+                    ARManagerID = Convert.ToInt32(word[0]),
+                    ARManagerFirstname = word[1],
+                    ARManagerSecondname = word[2]
+                };
+                ARManagers.Add(arm);
+            }
+
+            sr.Close();
         }
 
 

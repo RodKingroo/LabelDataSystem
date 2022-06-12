@@ -12,7 +12,7 @@
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <Button Grid.Column="0" Content="Сохранить" Margin="2,0,0,0" Height="20" VerticalAlignment="Center" HorizontalAlignment="Left" Width="68" Command="{Binding SaveBase}"/>
-        <Button Grid.Column="0" Content="Загрузить" Margin="73,0,0,0" Height="20" VerticalAlignment="Center" HorizontalAlignment="Left" Width="68"/>
+        <Button Grid.Column="0" Content="Импортировать в csv" Margin="73,0,0,0" Height="20" VerticalAlignment="Center" HorizontalAlignment="Left" Width="134" Command="{Binding ImportCSVButton}"/>
         <TabControl Grid.Row="1">
             <TabItem Header="Исполнители">
                 <Grid>
@@ -133,7 +133,7 @@
                         <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding CountTrackFinishContractWithPerson, UpdateSourceTrigger=PropertyChanged}"/>
                         <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding PriceContractWithPerson, UpdateSourceTrigger=PropertyChanged}"/>
                         <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding DataDeadlineContractWithPerson, UpdateSourceTrigger=PropertyChanged}"/>
-                     </Grid>
+                    </Grid>
                     <Button Grid.Column="0" Grid.Row="1" Margin="5,0,0,5" Content="Добавить" Command="{Binding AddContractWithPersonButton}" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="89"/>
                     <Button Grid.Column="0" Grid.Row="1" Margin="99,0,0,5" Content="Удалить" Command="{Binding RemoveContractWithPersonButton}" HorizontalAlignment="Left" Width="89" Height="20" VerticalAlignment="Bottom"/>
                 </Grid>
@@ -173,7 +173,6 @@
                         <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding ARManagerSecondname}"/>
                     </Grid>
                     <Button Grid.Column="0" Grid.Row="1" Margin="5,0,0,5" Content="Добавить" Command="{Binding AddARManagerButton}" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="89"/>
-                    <Button Grid.Column="0" Grid.Row="1" Margin="99,0,0,5" Content="Удалить" Command="{Binding RemoveARManagerButton}" HorizontalAlignment="Left" Width="89" Height="20" VerticalAlignment="Bottom"/>
                     <DataGrid Grid.Column="1" Margin="5" Grid.RowSpan="3" AutoGenerateColumns="False" ItemsSource="{Binding ARManagers}" SelectedItem="{Binding SelectedARManagers}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding ARManagerID}" Width="auto"/>
