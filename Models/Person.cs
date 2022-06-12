@@ -7,7 +7,7 @@ namespace LabelBaseSys.Models
     {
 
         private int _personID;
-        public int PersonPersonID
+        public int PersonID
         {
             get => _personID;
             set
