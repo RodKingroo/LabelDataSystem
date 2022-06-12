@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LabelBaseSys"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1000" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="720" Width="1100" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -20,9 +20,9 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Grid.Column="1" Margin="5,5,5,254" AutoGenerateColumns="False" ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedPerson}">
+                    <DataGrid Grid.Column="1" Margin="0,5,5,0" AutoGenerateColumns="False" ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedPerson}" Height="377" VerticalAlignment="Top" HorizontalAlignment="Right" Width="487">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Path=PersonID}"/>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Path=PersonID}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Псевдоним" Binding="{Binding Path=PersonNickname}"/>
                             <DataGridTextColumn Header="Имя" Binding="{Binding Path=PersonFirstname}"/>
                             <DataGridTextColumn Header="Фамилия" Binding="{Binding Path=PersonSecondname}"/>
@@ -33,7 +33,17 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-
+                    <DataGrid Grid.Column="1" Margin="0,387,5,0" AutoGenerateColumns="False" ItemsSource="{Binding ContractWithPerson}" SelectedItem="{Binding SelectedContractWithPerson}" Height="244" VerticalAlignment="Top" HorizontalAlignment="Right" Width="487">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding ContractWithPersonID}" IsReadOnly="True"/>
+                            <DataGridCheckBoxColumn Header="Активность" Binding="{Binding EnableContractWithPerson}"/>
+                            <DataGridTextColumn Header="Дата подписния" Binding="{Binding DataOfSignContractWithPerson}"/>
+                            <DataGridTextColumn Header="Треки по контракта" Binding="{Binding CountTrackUnderContractWithPerson}"/>
+                            <DataGridTextColumn Header="Выполнено" Binding="{Binding CountTrackFinishContractWithPerson}"/>
+                            <DataGridTextColumn Header="Дата окончания" Binding="{Binding DataDeadlineContractWithPerson}"/>
+                            <DataGridTextColumn Header="Прайс контракта" Binding="{Binding PriceContractWithPerson}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
 
                 </Grid>
             </TabItem>

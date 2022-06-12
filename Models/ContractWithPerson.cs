@@ -79,8 +79,8 @@ namespace LabelSystem.Models
             }
         }
 
-        private int _dataDeadline;
-        public int DataDeadlineContractWithPerson
+        private DateTime _dataDeadline;
+        public DateTime DataDeadlineContractWithPerson
         {
             get => _dataDeadline;
             set
