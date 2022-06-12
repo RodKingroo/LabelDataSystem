@@ -2,12 +2,12 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace LabelSystem.Models
+namespace LabelBaseSys.Models
 {
     public class Music : INotifyPropertyChanged
     {
         private int _musicID;
-        public int PK_MusicID
+        public int MusicID
         {
             get => _musicID;
             set
@@ -19,7 +19,7 @@ namespace LabelSystem.Models
         }
 
         private int _personID;
-        public int AY_PersonID
+        public int MusicPersonID
         {
             get => _personID;
             set
@@ -31,7 +31,7 @@ namespace LabelSystem.Models
         }
 
         private string _title;
-        public string Title
+        public string MusicTitle
         {
             get => _title;
             set
@@ -43,7 +43,7 @@ namespace LabelSystem.Models
         }
 
         private int _price;
-        public int Price
+        public int MusicPrice
         {
             get => _price;
             set
@@ -55,19 +55,19 @@ namespace LabelSystem.Models
         }
 
         private int _countAudition;
-        public int CountAudition
+        public int MusicCountAudition
         {
             get => _countAudition;
             set
             {
                 if (value == _countAudition) return;
-                _price = value;
+                _countAudition = value;
                 OnPropertyChanged();
             }
         }
 
         private int _countSell;
-        public int CountSell
+        public int MusicCountSell
         {
             get => _countSell;
             set
@@ -79,7 +79,7 @@ namespace LabelSystem.Models
         }
 
         private DateTime _dataRec;
-        public DateTime DataRec
+        public DateTime MusicDataRec
         {
             get => _dataRec;
             set
@@ -91,7 +91,7 @@ namespace LabelSystem.Models
         }
 
         private DateTime _dataRealise;
-        public DateTime DataRealise
+        public DateTime MusicDataRealise
         {
             get => _dataRealise;
             set
@@ -103,7 +103,7 @@ namespace LabelSystem.Models
         }
 
         private bool _enableRadio;
-        public bool EnableRadio
+        public bool MusicEnableRadio
         {
             get => _enableRadio;
             set
@@ -115,7 +115,7 @@ namespace LabelSystem.Models
         }
 
         private bool _presenceInStores;
-        public bool PresenceInStores
+        public bool MusicPresenceInStores
         {
             get => _presenceInStores;
             set
@@ -127,7 +127,7 @@ namespace LabelSystem.Models
         }
 
         private int _addContract;
-        public int AddContract
+        public int MusicAddContract
         {
             get => _addContract;
             set
@@ -140,7 +140,7 @@ namespace LabelSystem.Models
 
 
         private int _expens;
-        public int Expens
+        public int MusicExpens
         {
             get => _expens;
             set

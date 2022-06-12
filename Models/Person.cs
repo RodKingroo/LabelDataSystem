@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace LabelSystem.Models
+namespace LabelBaseSys.Models
 {
     public class Person : INotifyPropertyChanged
     {

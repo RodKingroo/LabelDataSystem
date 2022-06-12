@@ -23,6 +23,8 @@ namespace LabelBaseSys
         public MainWindow()
         {
             InitializeComponent();
+
+            DataContext = new ContextView();
         }
     }
 }

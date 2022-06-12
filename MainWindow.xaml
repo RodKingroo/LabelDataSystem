@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LabelBaseSys"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1100" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="700" Width="1000" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -20,20 +20,40 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Grid.Column="1" Margin="0,5,5,0" AutoGenerateColumns="False" ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedPerson}" Height="377" VerticalAlignment="Top" HorizontalAlignment="Right" Width="487">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <DataGrid Grid.Column="1" Grid.Row="3" Margin="5" AutoGenerateColumns="False" ItemsSource="{Binding Music}" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Path=MusicID}"/>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Path=MusicTitle}"/>
+                            <DataGridTextColumn Header="Цена" Binding="{Binding Path=MusicPrice}"/>
+                            <DataGridTextColumn Header="Количество Прослушиваний" Binding="{Binding Path=MusicCountAudition}"/>
+                            <DataGridTextColumn Header="Количество продаж" Binding="{Binding Path=MusicCountSell}"/>
+                            <DataGridTextColumn Header="Дата Записи" Binding="{Binding Path=MusicDataRec}"/>
+                            <DataGridTextColumn Header="Дата релиза" Binding="{Binding Path=MusicDataRealise}"/>
+                            <DataGridCheckBoxColumn Header="Радио" Binding="{Binding Path=MusicEnableRadio}"/>
+                            <DataGridCheckBoxColumn Header="Магазины" Binding="{Binding Path=MusicPresenceInStores}"/>
+                            <DataGridTextColumn Header="Внешний лейбл" Binding="{Binding Path=MusicAddContract}"/>
+                            <DataGridTextColumn Header="Затраты" Binding="{Binding Path=MusicExpens}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid Grid.Column="1" Grid.Row="0" Margin="5" AutoGenerateColumns="False" ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedPerson}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding Path=PersonID}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Псевдоним" Binding="{Binding Path=PersonNickname}"/>
                             <DataGridTextColumn Header="Имя" Binding="{Binding Path=PersonFirstname}"/>
                             <DataGridTextColumn Header="Фамилия" Binding="{Binding Path=PersonSecondname}"/>
-                            <DataGridTextColumn Header="Контракт" Binding="{Binding Path=PersonContract}"/>
                             <DataGridCheckBoxColumn Header="Участник" Binding="{Binding Path=PersonLabelMember}"/>
                             <DataGridTextColumn Header="Пригласивший" Binding="{Binding Path=PersonFoundByWhom}"/>
                             <DataGridTextColumn Header="Контракт" Binding="{Binding Path=PersonContract}"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <DataGrid Grid.Column="1" Margin="0,387,5,0" AutoGenerateColumns="False" ItemsSource="{Binding ContractWithPerson}" SelectedItem="{Binding SelectedContractWithPerson}" Height="244" VerticalAlignment="Top" HorizontalAlignment="Right" Width="487">
+                    <DataGrid Grid.Column="1" Grid.Row="1" Margin="5" AutoGenerateColumns="False" ItemsSource="{Binding ContractWithPerson}" SelectedItem="{Binding SelectedContractWithPerson}" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding ContractWithPersonID}" IsReadOnly="True"/>
                             <DataGridCheckBoxColumn Header="Активность" Binding="{Binding EnableContractWithPerson}"/>
@@ -49,7 +69,7 @@
             </TabItem>
             <TabItem Header="Треки">
                 <Grid>
-
+                
                 </Grid>
             </TabItem>
             <TabItem Header="Контракты с внешними">
