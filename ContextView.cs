@@ -31,14 +31,14 @@ namespace LabelBaseSys
         }
 
         private RelayCommand _addPersonButton;
-        public RelayCommand AddButton
+        public RelayCommand AddPersonButton
         {
             get
             {
                 return _addPersonButton ?? (_addPersonButton = new RelayCommand(obj=>
                 {
                     Person p = new Person();
-                    Persons.Insert(Persons.Count - 1, p);
+                    Persons.Insert(Persons.Count, p);
                     SelectedPersons = p;
                 }));
             }

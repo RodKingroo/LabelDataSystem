@@ -95,12 +95,52 @@
                         <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding PersonFirstname, UpdateSourceTrigger=PropertyChanged}"/>
                         <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding PersonSecondname, UpdateSourceTrigger=PropertyChanged}"/>
                         <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding PersonContact, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding PersonLabelMember, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding PersonFoundByWhom, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding PersonContract, UpdateSourceTrigger=PropertyChanged}"/>
+                        <CheckBox Grid.Column="1" Grid.Row="5" IsChecked="{Binding PersonLabelMember}"/>
+                        <ComboBox Grid.Column="1" Grid.Row="6" Name="ComboBoxARManager"/>
+                        <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding PersonContract, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
                     </Grid>
                     <Button Margin="5,0,0,5" Content="Добавить" Command="{Binding AddPersonButton}" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="89"/>
                     <Button Margin="99,0,0,5" Content="Удалить" Command="{Binding RemovePersonButton}" HorizontalAlignment="Left" Width="89" Height="20" VerticalAlignment="Bottom"/>
+
+                    <Grid Grid.Column="0" Grid.Row="1" Margin="5,5,5,30" DataContext="{Binding SelectedContractWithPerson}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="ID: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Активность контракта: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Дата подписания: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Количество треков по контракту: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="4" Text="Количество написанных треков: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="5" Text="Дата окончания контракта: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="6" Text="Стоимость контракта: " TextAlignment="Right"/>
+
+                        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding ContractWithPersonID, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding EnableContractWithPerson, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding DataOfSignContractWithPerson, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding CountTrackUnderContractWithPerson, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding CountTrackFinishContractWithPerson, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding PriceContractWithPerson, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding DataDeadlineContractWithPerson, UpdateSourceTrigger=PropertyChanged}"/>
+                     </Grid>
+                    <Button Grid.Column="0" Grid.Row="1" Margin="5,0,0,5" Content="Добавить" Command="{Binding AddContractWithPersonButton}" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="89"/>
+                    <Button Grid.Column="0" Grid.Row="1" Margin="99,0,0,5" Content="Удалить" Command="{Binding RemoveContractWithPersonButton}" HorizontalAlignment="Left" Width="89" Height="20" VerticalAlignment="Bottom"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="AR Менеджер">
+                <Grid>
+                    
                 </Grid>
             </TabItem>
         </TabControl>
