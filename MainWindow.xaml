@@ -5,184 +5,496 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LabelBaseSys"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1000" WindowStartupLocation="CenterScreen">
+        Title="LabelSys" Height="720" Width="800" ResizeMode="NoResize" Background="#FFE5E5E5" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button Grid.Column="0" Content="Сохранить" Margin="2,0,0,0" Height="20" VerticalAlignment="Center" HorizontalAlignment="Left" Width="68" Command="{Binding SaveBase}"/>
-        <Button Grid.Column="0" Content="Импортировать в csv" Margin="73,0,0,0" Height="20" VerticalAlignment="Center" HorizontalAlignment="Left" Width="134" Command="{Binding ImportCSVButton}"/>
+        <Button Grid.Row="0" Width="100" Height="25" Content="Сохранить" HorizontalAlignment="Left" Margin="5,5,0,5" VerticalAlignment="Top" />
+        <Button Grid.Row="0" Width="100" Height="25" Content="Загрузить" HorizontalAlignment="Left" Margin="110,5,0,5" VerticalAlignment="Top" />
+        <Rectangle HorizontalAlignment="Left" Height="35" Margin="215,0,0,0" Stroke="Gray" VerticalAlignment="Center" Width="1"/>
+        <Button Grid.Row="0"  Width="135" Height="25" Content="Экспортировать в .CSV" HorizontalAlignment="Left" Margin="222,5,0,5" VerticalAlignment="Top"/>
+        <Button Grid.Row="0" Width="135" Height="25" Content="Импортировать .CSV" HorizontalAlignment="Left" Margin="363,5,0,5" VerticalAlignment="Top"/>
         <TabControl Grid.Row="1">
             <TabItem Header="Исполнители">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
-
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
-                        <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <DataGrid Grid.Column="1" Grid.Row="3" Margin="5" AutoGenerateColumns="False" ItemsSource="{Binding Musics}" IsReadOnly="True">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Path=MusicID}" IsReadOnly="True" Width="auto"/>
-                            <DataGridTextColumn Header="Название" Binding="{Binding Path=MusicTitle}" Width="auto"/>
-                            <DataGridTextColumn Header="Цена" Binding="{Binding Path=MusicPrice}" Width="auto"/>
-                            <DataGridTextColumn Header="Количество Прослушиваний" Binding="{Binding Path=MusicCountAudition}" Width="auto"/>
-                            <DataGridTextColumn Header="Количество продаж" Binding="{Binding Path=MusicCountSell}" Width="auto"/>
-                            <DataGridTextColumn Header="Дата Записи" Binding="{Binding Path=MusicDataRec}" Width="auto"/>
-                            <DataGridTextColumn Header="Дата релиза" Binding="{Binding Path=MusicDataRealise}" Width="auto"/>
-                            <DataGridCheckBoxColumn Header="Радио" Binding="{Binding Path=MusicEnableRadio}" Width="auto"/>
-                            <DataGridCheckBoxColumn Header="Магазины" Binding="{Binding Path=MusicPresenceInStores}" Width="auto"/>
-                            <DataGridTextColumn Header="Внешний лейбл" Binding="{Binding Path=MusicAddContract}" Width="auto"/>
-                            <DataGridTextColumn Header="Затраты" Binding="{Binding Path=MusicExpens}" Width="auto"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    <DataGrid Grid.Column="1" Grid.Row="0" Margin="5" AutoGenerateColumns="False" ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedPerson}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding PersonID}" Width="auto"/>
-                            <DataGridTextColumn Header="Псевдоним" Binding="{Binding PersonNickname}" Width="auto"/>
-                            <DataGridTextColumn Header="Имя" Binding="{Binding PersonFirstname}" Width="auto"/>
-                            <DataGridTextColumn Header="Фамилия" Binding="{Binding PersonSecondname}" Width="auto"/>
-                            <DataGridTextColumn Header="E-Mail" Binding="{Binding PersonContact}" Width="auto"/>
-                            <DataGridCheckBoxColumn Header="Участник" Binding="{Binding PersonLabelMember}" Width="auto"/>
-                            <DataGridTextColumn Header="Пригласивший" Binding="{Binding PersonFoundByWhom}" Width="auto"/>
-                            <DataGridTextColumn Header="Контракт" Binding="{Binding PersonContract}" Width="auto"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-
-                    <DataGrid Grid.Column="1" Grid.Row="1" Margin="5" AutoGenerateColumns="False" ItemsSource="{Binding ContractWithPersons}" SelectedItem="{Binding SelectedContractWithPerson}" IsReadOnly="True">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding ContractWithPersonID}" IsReadOnly="True" Width="auto"/>
-                            <DataGridCheckBoxColumn Header="Активность" Binding="{Binding EnableContractWithPerson}" Width="auto"/>
-                            <DataGridTextColumn Header="Дата подписния" Binding="{Binding DataOfSignContractWithPerson}" Width="auto"/>
-                            <DataGridTextColumn Header="Треки по контракта" Binding="{Binding CountTrackUnderContractWithPerson}" Width="auto"/>
-                            <DataGridTextColumn Header="Выполнено" Binding="{Binding CountTrackFinishContractWithPerson}" Width="auto"/>
-                            <DataGridTextColumn Header="Дата окончания" Binding="{Binding DataDeadlineContractWithPerson}" Width="auto"/>
-                            <DataGridTextColumn Header="Прайс контракта" Binding="{Binding PriceContractWithPerson}" Width="auto"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    <Grid Grid.Column="0" Grid.Row="0" Margin="5,5,5,30" DataContext="{Binding SelectedPerson}">
+                    <Grid Grid.Column="0" Grid.Row="0" Margin="5,5,5,0" Height="232" VerticalAlignment="Top">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,0,5,0" Height="25" Text="ID: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,0,5,0" Height="25" Text="Пседоним: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Margin="5,0,5,0" Height="25" Text="Имя: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Margin="5,0,5,0" Height="25" Text="Фамилия: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="4" Margin="5,0,5,0" Height="25" Text="Контакт: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="5" Margin="5,0,5,0" Height="25" Text="Участник лейбла: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="6" Margin="5,0,5,0" Height="25" Text="Пригласивший: " TextAlignment="Right"/>
 
-                        <TextBlock Grid.Column="0" Grid.Row="0" Text="ID: " TextAlignment="Right"/>
-                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Псевдоним: " TextAlignment="Right"/>
-                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Имя: " TextAlignment="Right"/>
-                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Фамилия: " TextAlignment="Right"/>
-                        <TextBlock Grid.Column="0" Grid.Row="4" Text="Контакт: " TextAlignment="Right"/>
-                        <TextBlock Grid.Column="0" Grid.Row="5" Text="Участник: " TextAlignment="Right"/>
-                        <TextBlock Grid.Column="0" Grid.Row="6" Text="Пригласивший: " TextAlignment="Right"/>
-                        <TextBlock Grid.Column="0" Grid.Row="7" Text="Действующий контракт: " TextAlignment="Right"/>
+                        <TextBox Grid.Column="1" Grid.Row="0" Margin="5,0,5,0" Height="25"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" Margin="5,0,5,0" Height="25"/>
+                        <TextBox Grid.Column="1" Grid.Row="2" Margin="5,0,5,0" Height="25"/>
+                        <TextBox Grid.Column="1" Grid.Row="3" Margin="5,0,5,0" Height="25"/>
+                        <TextBox Grid.Column="1" Grid.Row="4" Margin="5,0,5,0" Height="25"/>
+                        <CheckBox Grid.Column="1" Grid.Row="5" Margin="5,0,5,0" Height="25"/>
+                        <ComboBox Grid.Column="1" Grid.Row="6" Margin="5,0,5,0" Height="25"/>
 
-                        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding PersonID, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding PersonNickname, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding PersonFirstname, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding PersonSecondname, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding PersonContact, UpdateSourceTrigger=PropertyChanged}"/>
-                        <CheckBox Grid.Column="1" Grid.Row="5" IsChecked="{Binding PersonLabelMember}"/>
-                        <ComboBox Grid.Column="1" Grid.Row="6" ItemsSource="{Binding ARManagers}" SelectedItem="{Binding SelectedPersonFoundByWhom}"/>
-                        <ComboBox Grid.Column="1" Grid.Row="7" Name="PersonContract"/>
+                        <Button Grid.Row="12" Margin="5,3,0,3" Width="75" Height="25" Content="Добавить" HorizontalAlignment="Left" />
+                        <Button Grid.Row="12" Margin="85,3,0,3" Width="75" Height="25" Content="Удалить" Grid.ColumnSpan="2" HorizontalAlignment="Left" />
                     </Grid>
-                    <Button Margin="5,0,0,5" Content="Добавить" Command="{Binding AddPersonButton}" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="89"/>
-                    <Button Margin="99,0,0,5" Content="Удалить" Command="{Binding RemovePersonButton}" HorizontalAlignment="Left" Width="89" Height="20" VerticalAlignment="Bottom"/>
-
-                    <Grid Grid.Column="0" Grid.Row="1" Margin="5,5,5,30" DataContext="{Binding SelectedContractWithPerson}">
+                    <Grid Grid.Column="0" Margin="5,0,5,5" Grid.RowSpan="2" Background="#a2fff2" Height="374" VerticalAlignment="Bottom">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Column="0" Grid.Row="0" Text="ID: " TextAlignment="Right"/>
-                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Активность контракта: " TextAlignment="Right"/>
-                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Дата подписания: " TextAlignment="Right"/>
-                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Количество треков по контракту: " TextAlignment="Right"/>
-                        <TextBlock Grid.Column="0" Grid.Row="4" Text="Количество написанных треков: " TextAlignment="Right"/>
-                        <TextBlock Grid.Column="0" Grid.Row="5" Text="Дата окончания контракта: " TextAlignment="Right"/>
-                        <TextBlock Grid.Column="0" Grid.Row="6" Text="Стоимость контракта: " TextAlignment="Right"/>
-
-                        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding ContractWithPersonID, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding EnableContractWithPerson, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding DataOfSignContractWithPerson, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding CountTrackUnderContractWithPerson, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding CountTrackFinishContractWithPerson, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding PriceContractWithPerson, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding DataDeadlineContractWithPerson, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,0,5,0" Height="25" Text="Участник лейбла: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,0,5,0" Height="25" Text="Пригласивший: " TextAlignment="Right"/>
+                        <CheckBox Grid.Column="1" Grid.Row="0" Margin="5,0,5,0" Height="25"/>
+                        <ComboBox Grid.Column="1" Grid.Row="1" Margin="5,0,5,0" Height="25"/>
+                        <Button Grid.ColumnSpan="2" Grid.Row="2" Margin="5,0,5,0" Height="25" Content="Сбросить фильтр"/>
+                        <DataGrid Grid.ColumnSpan="2" Grid.Row="3" Grid.RowSpan="4" Margin="5,5,5,0">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </Grid>
-                    <Button Grid.Column="0" Grid.Row="1" Margin="5,0,0,5" Content="Добавить" Command="{Binding AddContractWithPersonButton}" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="89"/>
-                    <Button Grid.Column="0" Grid.Row="1" Margin="99,0,0,5" Content="Удалить" Command="{Binding RemoveContractWithPersonButton}" HorizontalAlignment="Left" Width="89" Height="20" VerticalAlignment="Bottom"/>
+                    <DataGrid Grid.Column="1" Grid.RowSpan="2" Margin="5">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Header="AR Менеджер">
+            <TabItem Header="Музыка">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
-                        <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Column="0" Grid.Row="1" Margin="5,5,5,30" DataContext="{Binding SelectedARManagers}">
+                    <Grid Grid.Column="0" Grid.Row="0" Margin="5,5,5,0" Grid.RowSpan="2" Height="331" VerticalAlignment="Top">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,0,5,0" Height="25" Text="ID: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,0,5,0" Height="25" Text="Исполнитель: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Margin="5,0,5,0" Height="25" Text="Название: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Margin="5,0,5,0" Height="25" Text="Стоимость трека: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="4" Margin="5,0,5,0" Height="25" Text="Кол-во прослушиваний: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="5" Margin="5,0,5,0" Height="25" Text="Кол-во продаж: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="6" Margin="5,0,5,0" Height="25" Text="Дата записи: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="7" Margin="5,0,5,0" Height="25" Text="Дата релиза: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="8" Margin="5,0,5,0" Height="25" Text="Играет на радио: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="9" Margin="5,0,5,0" Height="25" Text="Продается в магазинах: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="11" Margin="5,0,5,0" Height="25" Text="Затраты: " TextAlignment="Right"/>
 
-                        <TextBlock Grid.Column="0" Grid.Row="2" Text="ID: " TextAlignment="Right"/>
-                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Имя: " TextAlignment="Right"/>
-                        <TextBlock Grid.Column="0" Grid.Row="4" Text="Фамилия: " TextAlignment="Right"/>
+                        <TextBox Grid.Column="1" Grid.Row="0" Margin="5,0,5,0" Height="25"/>
+                        <ComboBox Grid.Column="1" Grid.Row="1" Margin="5,0,5,0" Height="25"/>
+                        <TextBox Grid.Column="1" Grid.Row="2" Margin="5,0,5,0" Height="25"/>
+                        <ComboBox Grid.Column="1" Grid.Row="3" Margin="5,0,5,0" Height="25"/>
+                        <TextBox Grid.Column="1" Grid.Row="4" Margin="5,0,5,0" Height="25"/>
+                        <TextBox Grid.Column="1" Grid.Row="5" Margin="5,0,5,0" Height="25"/>
+                        <DatePicker Grid.Column="1" Grid.Row="6" Margin="5,0,5,0" Height="25"/>
+                        <DatePicker Grid.Column="1" Grid.Row="7" Margin="5,0,5,0" Height="25"/>
+                        <CheckBox Grid.Column="1" Grid.Row="8" Margin="5,0,5,0" Height="25"/>
+                        <CheckBox Grid.Column="1" Grid.Row="9" Margin="5,0,5,0" Height="25"/>
+                        <ComboBox Grid.Column="1" Grid.Row="11" Margin="5,0,5,0" Height="25"/>
 
-                        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding ARManagerID}" IsReadOnly="True"/>
-                        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding ARManagerFirstname}"/>
-                        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding ARManagerSecondname}"/>
+                        <Button Grid.Row="12" Margin="5,3,0,3" Width="75" Height="25"  Content="Добавить" HorizontalAlignment="Left"/>
+                        <Button Grid.Row="12" Margin="85,3,0,3" Width="75" Height="25" Content="Удалить" Grid.ColumnSpan="2" HorizontalAlignment="Left"/>
                     </Grid>
-                    <Button Grid.Column="0" Grid.Row="1" Margin="5,0,0,5" Content="Добавить" Command="{Binding AddARManagerButton}" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="89"/>
-                    <DataGrid Grid.Column="1" Margin="5" Grid.RowSpan="3" AutoGenerateColumns="False" ItemsSource="{Binding ARManagers}" SelectedItem="{Binding SelectedARManagers}">
+                    <Grid Grid.Column="0" Grid.Row="1" Margin="5,0,5,5" Height="275" Background="#a2fff2" VerticalAlignment="Bottom">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,0,5,0" Height="25" Text="Исполнитель: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,0,5,0" Height="25" Text="Играет на радио: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Margin="5,0,5,0" Height="25" Text="Продается в магазинах: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Margin="5,0,5,0" Height="25" Text="Стоимость треков: " TextAlignment="Right"/>
+                        <ComboBox Grid.Column="1" Grid.Row="0" Margin="5,0,5,0" Height="25"/>
+                        <CheckBox Grid.Column="1" Grid.Row="1" Margin="5,0,5,0" Height="25"/>
+                        <CheckBox Grid.Column="1" Grid.Row="2" Margin="5,0,5,0" Height="25"/>
+                        <ComboBox Grid.Column="1" Grid.Row="3" Margin="5,0,5,0" Height="25"/>
+                        <Button Grid.ColumnSpan="2" Grid.Row="4" Margin="5,0,5,0" Height="25" Content="Сбросить фильтр"/>
+                        <DataGrid Grid.ColumnSpan="2" Grid.Row="5" Grid.RowSpan="3" Margin="5,5,5,0">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                    <DataGrid Grid.Column="1" Grid.RowSpan="2" Margin="5">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding ARManagerID}" Width="auto"/>
-                            <DataGridTextColumn Header="Имя" Binding="{Binding ARManagerFirstname}" Width="auto"/>
-                            <DataGridTextColumn Header="Фамилия" Binding="{Binding ARManagerSecondname}" Width="auto"/>
+                            <DataGridTextColumn Header="ID"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Внутренние контракты">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0" Margin="5,5,5,74">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,0,5,0" Height="25" Text="ID: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,0,5,0" Height="25" Text="Обладатель: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Margin="5,0,5,0" Height="25" Text="Действ-ость контракта: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Margin="5,0,5,0" Height="25" Text="Дата подписания: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="4" Margin="5,0,5,0" Height="25" Text="Кол-во треков: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="5" Margin="5,0,5,0" Height="25" Text="Кол-во треков готово: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="6" Margin="5,0,5,0" Height="25" Text="Цена контракта: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="7" Margin="5,0,5,0" Height="25" Text="Дедлайн: " TextAlignment="Right"/>
+
+                        <TextBox Grid.Column="1" Grid.Row="0" Margin="5,0,5,0" Height="25"/>
+                        <ComboBox Grid.Column="1" Grid.Row="1" Margin="5,0,5,0" Height="25"/>
+                        <CheckBox Grid.Column="1" Grid.Row="2" Margin="5,0,5,0" Height="25"/>
+                        <DatePicker Grid.Column="1" Grid.Row="3" Margin="5,0,5,0" Height="25"/>
+                        <TextBox Grid.Column="1" Grid.Row="4" Margin="5,0,5,0" Height="25"/>
+                        <TextBox Grid.Column="1" Grid.Row="5" Margin="5,0,5,0" Height="25"/>
+                        <TextBox Grid.Column="1" Grid.Row="6" Margin="5,0,5,0" Height="25"/>
+                        <DatePicker Grid.Column="1" Grid.Row="7" Margin="5,0,5,0" Height="25"/>
+
+                        <Button Grid.Row="12" Margin="5,5,0,0" Width="75" Height="25"  Content="Добавить" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <Button Grid.Row="12" Margin="85,5,0,0" Width="75" Height="25" Content="Удалить" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </Grid>
+                    <Grid Grid.Column="0" Margin="5,247,5,5" Grid.RowSpan="2" Background="#a2fff2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,0,5,0" Height="25" Text="Обладатель: " TextAlignment="Right"/>
+                        <ComboBox Grid.Column="1" Grid.Row="0" Margin="5,0,5,0" Height="25"/>
+                        <Button Grid.ColumnSpan="2" Grid.Row="1" Margin="5,0,5,0" Height="25" Content="Сбросить фильтр"/>
+                        <DataGrid Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="5" Margin="5,5,5,0">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                    <DataGrid Grid.Column="1" Grid.RowSpan="2" Margin="5">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Внешние контракты">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0" Margin="5,5,5,0" Height="184" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,0,5,0" Height="25" Text="ID: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,0,5,0" Height="25" Text="Обладатель: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Margin="5,0,5,0" Height="25" Text="Дейст-ость контракта: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Margin="5,0,5,0" Height="25" Text="Трек по контракту: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="4" Margin="5,0,5,0" Height="25" Text="Дата подписания: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="5" Margin="5,0,5,0" Height="25" Text="Дата окончания: " TextAlignment="Right"/>
+
+                        <TextBox Grid.Column="1" Grid.Row="0" Margin="5,0,5,0" Height="25"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" Margin="5,0,5,0" Height="25"/>
+                        <CheckBox Grid.Column="1" Grid.Row="2" Margin="5,0,5,0" Height="25"/>
+                        <ComboBox Grid.Column="1" Grid.Row="3" Margin="5,0,5,0" Height="25"/>
+                        <DatePicker Grid.Column="1" Grid.Row="4" Margin="5,0,5,0" Height="25"/>
+                        <DatePicker Grid.Column="1" Grid.Row="5" Margin="5,0,5,0" Height="25"/>
+
+                        <Button Grid.Row="12" Margin="5,4,0,5" Height="25" Content="Добавить" HorizontalAlignment="Left" Width="75"/>
+                        <Button Grid.Row="12" Margin="85,4,0,5" Height="25" Content="Удалить" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="75"/>
+                    </Grid>
+                    <Grid Grid.Column="0" Margin="5,194,5,5" Grid.RowSpan="2" Background="#a2fff2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,0,5,0" Height="25" Text="Обладатель: " TextAlignment="Right"/>
+                        <TextBox Grid.Column="1" Grid.Row="0" Margin="5,0,5,0" Height="25"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,0,5,0" Height="25" Text="Действ-ость контракта: " TextAlignment="Right"/>
+                        <CheckBox Grid.Column="1" Grid.Row="1" Margin="5,0,5,0" Height="25"/>
+                        <Button Grid.ColumnSpan="2" Grid.Row="2" Margin="5,0,5,0" Height="25" Content="Сбросить фильтр"/>
+                        <DataGrid Grid.ColumnSpan="2" Grid.Row="3" Grid.RowSpan="4" Margin="5,5,5,0">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                    <DataGrid Grid.Column="1" Grid.RowSpan="2" Margin="5">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="AR Менеджеры">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0" Margin="5,5,5,191">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,0,5,0" Height="25" Text="ID: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,0,5,0" Height="25" Text="Имя: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Margin="5,0,5,0" Height="25" Text="Фамилия: " TextAlignment="Right"/>
+
+                        <TextBox Grid.Column="1" Grid.Row="0" Margin="5,0,5,0" Height="25"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" Margin="5,0,5,0" Height="25"/>
+                        <TextBox Grid.Column="1" Grid.Row="2" Margin="5,0,5,0" Height="25"/>
+
+                        <Button Grid.Row="12" Margin="5,5,0,5" Width="75" Height="25"  Content="Добавить" HorizontalAlignment="Left"/>
+                        <Button Grid.Row="12" Margin="85,5,0,5" Width="75" Height="25" Content="Удалить" Grid.ColumnSpan="2" HorizontalAlignment="Left"/>
+                    </Grid>
+                    <DataGrid Grid.Column="1" Grid.RowSpan="2" Margin="5">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Затраты">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0" Margin="5,5,5,187">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,0,5,0" Height="25" Text="ID: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,0,5,0" Height="25" Text="Стоимость: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Margin="5,0,5,0" Height="25" Text="Тип затрат: " TextAlignment="Right"/>
+
+                        <TextBox Grid.Column="1" Grid.Row="0" Margin="5,0,5,0" Height="25"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" Margin="5,0,5,0" Height="25"/>
+                        <TextBox Grid.Column="1" Grid.Row="2" Margin="5,0,5,0" Height="25"/>
+
+                        <Button Grid.Row="12" Margin="5,5,0,6" Width="75" Height="25"  Content="Добавить" HorizontalAlignment="Left"/>
+                        <Button Grid.Row="12" Margin="85,5,0,6" Width="75" Height="25" Content="Удалить" Grid.ColumnSpan="2" HorizontalAlignment="Left"/>
+                    </Grid>
+                    <DataGrid Grid.Column="1" Grid.RowSpan="2" Margin="5">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Стоимость треков">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0" Margin="5,5,5,209">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,0,5,0" Height="25" Text="ID: " TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,0,5,0" Height="25" Text="Цена: " TextAlignment="Right"/>
+
+                        <TextBox Grid.Column="1" Grid.Row="0" Margin="5,0,5,0" Height="25"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" Margin="5,0,5,0" Height="25"/>
+
+                        <Button Grid.Row="12" Margin="5,5,0,5" Width="75" Height="25" Content="Добавить" HorizontalAlignment="Left"/>
+                        <Button Grid.Row="12" Margin="85,5,0,5" Width="75" Height="25" Content="Удалить" Grid.ColumnSpan="2" HorizontalAlignment="Left"/>
+                    </Grid>
+                    <DataGrid Grid.Column="1" Grid.RowSpan="2" Margin="5">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>
-    </Grid>
 
+    </Grid>
 </Window>
