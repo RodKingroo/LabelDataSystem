@@ -1,161 +1,192 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-using LabelBaseSys.Models;
 
-namespace LabelBaseSys
+using LabelSystem.Model;
+
+namespace LabelSystem
 {
     public class ContextView : INotifyPropertyChanged
     {
 
-
-        public ObservableCollection<ARManager> ARManagers { get; }
         public ObservableCollection<Person> Persons { get; }
-
-        private ARManager _selectedARManagers;
-        public ARManager SelectedARManagers
-        {
-            get => _selectedARManagers;
-            set
-            {
-                if (value == _selectedARManagers) return;
-                _selectedARManagers = value;
-                OnPropertyChanged();
-            }
-        }
+        public ObservableCollection<ContractWithLabel> ContractWithLabels { get; }
+        public ObservableCollection<ContractWithPerson> ContractWithPersons { get; }
+        public ObservableCollection<Music> Musics { get; }
+        public ObservableCollection<ARManager> ARManagers { get; }
+        public ObservableCollection<Price> Prices { get; }
 
         private Person _selectedPersons;
-        public Person SelectedPerson
+        public Person SelectedPersons
         {
             get => _selectedPersons;
             set
             {
-                if(value==_selectedPersons) return;
                 _selectedPersons = value;
                 OnPropertyChanged();
             }
         }
 
-        private RelayCommand _addPersonButton;
+        private Music _selectedMusic;
+        public Music SelectedMusics
+        {
+            get => _selectedMusic;
+            set
+            {
+                _selectedMusic = value;
+                OnPropertyChanged();
+            }
+        }
+        private ContractWithPerson _selectedContractWithPersons;
+        public ContractWithPerson SelectedContractWithPersons
+        {
+            get => _selectedContractWithPersons;
+            set
+            {
+                _selectedContractWithPersons = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ContractWithLabel _selectedContractWithLabel;
+        public ContractWithLabel SelectedContractWithLabel
+        {
+            get => _selectedContractWithLabel;
+            set
+            {
+                _selectedContractWithLabel = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ARManager _selectedARManager;
+        public ARManager SelectedARManager
+        {
+            get => _selectedARManager;
+            set
+            {
+                _selectedARManager = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Price _selectedPrice;
+        public Price SelectedPrices
+        {
+            get => _selectedPrice;
+            set
+            {
+                _selectedPrice = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private RelayCommand _addPerson;
         public RelayCommand AddPersonButton
         {
             get
             {
-                return _addPersonButton ?? (_addPersonButton = new RelayCommand(obj =>
+                return _addPerson ?? (_addPerson = new RelayCommand(obj =>
                 {
+                    Random r = new Random();
                     Person p = new Person();
-                    p.PersonID = Persons.Count + 1;
+                    p.PersonID = r.Next(99999);
                     Persons.Insert(Persons.Count, p);
-                    SelectedPerson = p;
+                    SelectedPersons = p;
                 }));
             }
         }
 
-        private RelayCommand _addARManagerButton;
-        public RelayCommand AddARManagerButton
+        private RelayCommand _addMusic;
+        public RelayCommand AddMusicButton
         {
             get
             {
-                return _addARManagerButton ?? (_addARManagerButton = new RelayCommand(obj =>
+                return _addMusic ?? (_addMusic = new RelayCommand(obj =>
                 {
-                    
+                    Random r = new Random();
+                    Music m = new Music();
+                    m.TrackID = r.Next(99999);
+                    Musics.Insert(Musics.Count, m);
+                    SelectedMusics = m;
+                }));
+            }
+        }
+
+        private RelayCommand _addContractwithperson;
+        public RelayCommand AddContractWithPerson
+        {
+            get
+            {
+                return _addContractwithperson ?? (_addContractwithperson = new RelayCommand(obj =>
+                {
+                    Random r = new Random();
+                    ContractWithPerson cwp = new ContractWithPerson();
+                    cwp.ContractWithPersonID = r.Next(99999);
+                    ContractWithPersons.Insert(ContractWithPersons.Count, cwp);
+                    SelectedContractWithPersons = cwp;
+                }));
+            }
+        }
+
+        private RelayCommand _addARManagerbutton;
+        public RelayCommand AddARManButton
+        {
+            get
+            {
+                return _addARManagerbutton ?? (_addARManagerbutton = new RelayCommand(obj =>
+                {
+                    Random r = new Random();
                     ARManager arm = new ARManager();
-                    arm.ARManagerID = ARManagers.Count+1;
+                    arm.ARManagerID = r.Next(99999);
                     ARManagers.Insert(ARManagers.Count, arm);
-                    SelectedARManagers = arm;
+                    SelectedARManager = arm;
                 }));
             }
         }
 
-        private RelayCommand _saveBase;
-        public RelayCommand SaveBase
+        private RelayCommand _addContractwithlabel;
+        public RelayCommand AddContractWithLabel
         {
             get
             {
-                return _saveBase ?? (_saveBase = new RelayCommand(obj =>
+                return _addContractwithlabel ?? (_addContractwithlabel = new RelayCommand(obj =>
                 {
-                    Coderin сoderin = new Coderin();
-                    var direct = AppDomain.CurrentDomain.BaseDirectory;
-                    var ARMans = $"base/ARMans.lbs";
-                    var Person = $"base/Persons.lbs";
-                    ushort key = 0x6010;
-                    StreamWriter swAR = new StreamWriter(direct+ARMans, false);
-                    foreach(ARManager item in ARManagers)
-                    {
-                        string sandwich = $"{Convert.ToString(item.ARManagerID)};{item.ARManagerFirstname};{item.ARManagerSecondname};";
-                        sandwich = сoderin.EncodDestruct(sandwich, key);
-                        swAR.WriteLine(sandwich);
-                    }
-
-                    StreamWriter swPer = new StreamWriter(direct + Person, false);
-                    foreach (Person item in Persons)
-                    {
-                        string sandwich = $"{Convert.ToString(item.PersonID)};{item.PersonNickname};{item.PersonFirstname};" +
-                        $"{item.PersonSecondname};{item.PersonContract};{item.PersonLabelMember};{item.PersonFoundByWhom};" +
-                        $"{item.PersonContract};"; 
-                        sandwich = сoderin.EncodDestruct(sandwich, key);
-                        swPer.WriteLine(sandwich);
-                    }
-                    
-                    swAR.Close(); swPer.Close();
+                    Random r = new Random();
+                    ContractWithLabel cwl = new ContractWithLabel();
+                    cwl.ContractWithLabelID = r.Next(99999);
+                    ContractWithLabels.Insert(ContractWithLabels.Count, cwl);
+                    SelectedContractWithLabel = cwl;
                 }));
             }
         }
 
-        public ContextView()
+        private RelayCommand _addPriceButton;
+        public RelayCommand AddPriceButton
         {
-            ARManagers = new ObservableCollection<ARManager> { };
-            Persons = new ObservableCollection<Person> { };
-
-            Coderin coderin = new Coderin();
-            var direct = AppDomain.CurrentDomain.BaseDirectory;
-            var ARMans = $"base/ARMans.lbs";
-            var Person = $"base/Persons.lbs";
-            string line; ushort key = 0x6010;
-            StreamReader srAR = new StreamReader(direct + ARMans);
-            while ((line = srAR.ReadLine()) != null)
+            get
             {
-                line = coderin.EncodDestruct(line, key);
-                string[] word = line.Split(';');
-                var arm = new ARManager()
+                return _addPriceButton ?? (_addPriceButton = new RelayCommand(obj =>
                 {
-                    ARManagerID = Convert.ToInt32(word[0]),
-                    ARManagerFirstname = word[1],
-                    ARManagerSecondname = word[2]
-                };
-                ARManagers.Add(arm);
+                    Random r = new Random();
+                    Price p = new Price();
+                    p.PriceID = r.Next(99999);
+                    Prices.Insert(Prices.Count, p);
+                    SelectedPrices = p;
+                }));
             }
-
-            StreamReader srPer = new StreamReader(direct + Person);
-            while ((line = srPer.ReadLine()) != null)
-            {
-                line = coderin.EncodDestruct(line, key);
-                string[] word = line.Split(';');
-                var per = new Person()
-                {
-                    PersonID = Convert.ToInt32(word[0]),
-                    PersonNickname = word[1],
-                    PersonFirstname = word[2],
-                    PersonSecondname = word[3],
-                    PersonContact = word[4],
-                    PersonLabelMember = Convert.ToBoolean(word[5]),
-                    PersonFoundByWhom = Convert.ToInt32(word[6]),
-                    PersonContract = Convert.ToInt32(word[7])
-                };
-                Persons.Add(per);
-            }
-
-            srAR.Close(); srPer.Close();
         }
 
+        public ContextView(){
+            Persons = new ObservableCollection<Person>() { };
+            ContractWithLabels = new ObservableCollection<ContractWithLabel>() { };
+            ContractWithPersons = new ObservableCollection<ContractWithPerson>() { };
+            Musics = new ObservableCollection<Music>() { };
+            ARManagers = new ObservableCollection<ARManager>() { };
+            Prices = new ObservableCollection<Price>() { };
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -163,5 +194,6 @@ namespace LabelBaseSys
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
     }
 }

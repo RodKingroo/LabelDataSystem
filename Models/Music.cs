@@ -2,151 +2,135 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace LabelBaseSys.Models
+namespace LabelSystem.Model
 {
     public class Music : INotifyPropertyChanged
     {
-        private int _musicID;
-        public int MusicID
+        private int _id;
+        public int TrackID
         {
-            get => _musicID;
+            get => _id;
             set
             {
-                if (value ==_musicID) return;
-                _musicID = value;
+                _id = value;
                 OnPropertyChanged();
             }
         }
 
         private int _personID;
-        public int MusicPersonID
+        public int TrackPersonID
         {
             get => _personID;
             set
             {
-                if (value == _personID) return;
                 _personID = value;
                 OnPropertyChanged();
             }
         }
 
         private string _title;
-        public string MusicTitle
+        public string TrackTitle
         {
             get => _title;
             set
             {
-                if (value == _title) return;
                 _title = value;
                 OnPropertyChanged();
             }
         }
 
-        private int _price;
-        public int MusicPrice
+        private int _priceID;
+        public int TrackPriceID
         {
-            get => _price;
+            get => _priceID;
             set
             {
-                if (value == _price) return;
-                _price = value;
+                _priceID = value;
                 OnPropertyChanged();
             }
         }
 
-        private int _countAudition;
-        public int MusicCountAudition
+        private int _audition;
+        public int TrackCountAudition
         {
-            get => _countAudition;
+            get => _audition;
             set
             {
-                if (value == _countAudition) return;
-                _countAudition = value;
+                _audition = value;
                 OnPropertyChanged();
             }
         }
 
-        private int _countSell;
-        public int MusicCountSell
+        private int _sell;
+        public int TrackCountSell
         {
-            get => _countSell;
+            get => _sell;
             set
             {
-                if (value == _countSell) return;
-                _countSell = value;
+                _sell = value;
                 OnPropertyChanged();
             }
         }
 
-        private DateTime _dataRec;
-        public DateTime MusicDataRec
+        private Nullable<DateTime> _rec = null;
+        public Nullable<DateTime> TrackDataRec
         {
-            get => _dataRec;
+            get
+            {
+                if (_rec == null) _rec = DateTime.Today;
+                return _rec;
+            }
             set
             {
-                if (value == _dataRec) return;
-                _dataRec = value;
+                _rec = value;
                 OnPropertyChanged();
             }
         }
 
-        private DateTime _dataRealise;
-        public DateTime MusicDataRealise
+        private Nullable<DateTime> _realise = null;
+        public Nullable<DateTime> TrackDataRealise
         {
-            get => _dataRealise;
+            get
+            {
+                if (_realise == null) _realise = DateTime.Today;
+                return _realise;
+            }
             set
             {
-                if (value == _dataRealise) return;
-                _dataRealise = value;
+                _realise = value;
                 OnPropertyChanged();
             }
         }
 
-        private bool _enableRadio;
-        public bool MusicEnableRadio
+        private bool _radio;
+        public bool EnableRadio
         {
-            get => _enableRadio;
+            get => _radio;
             set
             {
-                if (value == _enableRadio) return;
-                _enableRadio = value;
+                _radio = value;
                 OnPropertyChanged();
             }
         }
 
-        private bool _presenceInStores;
-        public bool MusicPresenceInStores
+        private bool _sellintstore;
+        public bool PresenceInStore
         {
-            get => _presenceInStores;
+            get => _sellintstore;
             set
             {
-                if (value == _presenceInStores) return;
-                _presenceInStores = value;
+                _sellintstore = value;
                 OnPropertyChanged();
             }
         }
 
-        private int _addContract;
-        public int MusicAddContract
+        private int _labelcontrackid;
+        public int LabelContrackID
         {
-            get => _addContract;
+            get => _labelcontrackid;
             set
             {
-                if (value == _addContract) return;
-                _addContract = value;
-                OnPropertyChanged();
-            }
-        }
-
-
-        private int _expens;
-        public int MusicExpens
-        {
-            get => _expens;
-            set
-            {
-                if (value == _expens) return;
-                _expens = value;
+                _labelcontrackid = value;
                 OnPropertyChanged();
             }
         }
@@ -157,6 +141,5 @@ namespace LabelBaseSys.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
     }
 }

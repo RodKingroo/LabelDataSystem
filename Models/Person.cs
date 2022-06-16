@@ -1,103 +1,83 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace LabelBaseSys.Models
+namespace LabelSystem.Model
 {
     public class Person : INotifyPropertyChanged
     {
-
-        private int _personID;
+        private int _id;
         public int PersonID
         {
-            get => _personID;
+            get => _id;
             set
             {
-                if (value == _personID) return;
-                _personID = value;
+                _id = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _nickname;
+        private string _nick;
         public string PersonNickname
         {
-            get => _nickname;
+            get => _nick;
             set
             {
-                if (value == _nickname) return;
-                _nickname = value;
+                _nick = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _firstname;
+        private string _first;
         public string PersonFirstname
         {
-            get => _firstname;
+            get => _first;
             set
             {
-                if (value == _firstname) return;
-                _firstname = value;
+                _first = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _secondname;
+        private string _second;
         public string PersonSecondname
         {
-            get => _secondname;
+            get => _second;
             set
             {
-                if (value == _secondname) return;
-                _secondname = value;
+                _second = value;
                 OnPropertyChanged();
             }
         }
 
         private string _contact;
-        public string PersonContact
+        public string PersonContract
         {
             get => _contact;
             set
             {
-                if (value == _contact) return;
                 _contact = value;
                 OnPropertyChanged();
             }
         }
 
-        private bool _labelMember;
+        private bool _labelmember;
         public bool PersonLabelMember
         {
-            get => _labelMember;
+            get => _labelmember;
             set
             {
-                if (value == _labelMember) return;
-                _labelMember = value;
+                _labelmember = value;
                 OnPropertyChanged();
             }
         }
 
-        private int _foundByWhom;
-        public int PersonFoundByWhom
+        private int _armanager;
+        public int PersonARManagerID
         {
-            get => _foundByWhom;
+            get => _armanager;
             set
             {
-                if (value == _foundByWhom) return;
-                _foundByWhom = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private int _contract;
-        public int PersonContract
-        {
-            get => _contract;
-            set
-            {
-                if (value == _contract) return;
-                _contract = value;
+                _armanager = value;
                 OnPropertyChanged();
             }
         }

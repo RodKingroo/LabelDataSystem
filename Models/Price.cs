@@ -3,11 +3,11 @@ using System.Runtime.CompilerServices;
 
 namespace LabelSystem.Model
 {
-    public class ARManager : INotifyPropertyChanged
+    public class Price : INotifyPropertyChanged
     {
 
         private int _id;
-        public int ARManagerID
+        public int PriceID
         {
             get => _id;
             set
@@ -17,24 +17,13 @@ namespace LabelSystem.Model
             }
         }
 
-        private string _first;
-        public string Firstname
+        private double _size;
+        public double PriceSize
         {
-            get => _first;
+            get => _size;
             set
             {
-                _first = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _second;
-        public string Secondname
-        {
-            get => _second;
-            set
-            {
-                _second = value;
+                _size = value;
                 OnPropertyChanged();
             }
         }
@@ -45,5 +34,6 @@ namespace LabelSystem.Model
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
     }
 }

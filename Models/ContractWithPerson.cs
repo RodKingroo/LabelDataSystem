@@ -2,91 +2,104 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace LabelBaseSys.Models
+namespace LabelSystem.Model
 {
     public class ContractWithPerson : INotifyPropertyChanged
     {
 
-        private int _contractID;
+        private int _id;
         public int ContractWithPersonID
         {
-            get=> _contractID;
+            get => _id;
             set
             {
-                if (value == _contractID) return;
-                _contractID = value;
+                _id = value;
                 OnPropertyChanged();
             }
         }
 
-        private bool _enableContract;
-        public bool EnableContractWithPerson
+        private int _personID;
+        public int ContractWithPersonPID
         {
-            get => _enableContract;
+            get => _personID;
             set
             {
-                if(value==_enableContract) return;
-                _enableContract = value;
+                _personID = value;
                 OnPropertyChanged();
             }
         }
 
-        private DateTime _dataOfSign;
-        public DateTime DataOfSignContractWithPerson
+        private bool _enable;
+        public bool ContractWithPersonEnable
         {
-            get => _dataOfSign;
+            get => _enable;
             set
             {
-                if (value == _dataOfSign) return;
-                _dataOfSign = value;
+                _enable = value;
                 OnPropertyChanged();
             }
         }
 
-        private int _countTrackUnderContract;
-        public int CountTrackUnderContractWithPerson
+        private Nullable<DateTime> _dateOfSingle = null;
+        public Nullable<DateTime> ContractWithPersonDateOfSingle
         {
-            get => _countTrackUnderContract;
+            get
+            {
+                if (_dateOfSingle == null) _dateOfSingle = DateTime.Today;
+                return _dateOfSingle;
+            }
             set
             {
-                if (value == _countTrackUnderContract) return;
-                _countTrackUnderContract = value;
+                _dateOfSingle = value;
                 OnPropertyChanged();
             }
         }
 
-        private int _countTrackReady;
-        public int CountTrackFinishContractWithPerson
+
+        private int _countundertrack;
+        public int ContractWithPersonCountTrackUnder
         {
-            get => _countTrackReady;
+            get => _countundertrack;
             set
             {
-                if (value == _countTrackReady) return;
-                _countTrackReady = value;
+                _countundertrack = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int _countreadytrack;
+        public int CountrackWithPersonCountReadyTrack
+        {
+            get => _countreadytrack;
+            set
+            {
+                _countreadytrack = value;
                 OnPropertyChanged();
             }
         }
 
         private int _price;
-        public int PriceContractWithPerson
+        public int ContractWithPersonPrice
         {
-            get => _price;
+            get=> _price;
             set
             {
-                if(value==_price) return;
                 _price = value;
                 OnPropertyChanged();
             }
         }
 
-        private DateTime _dataDeadline;
-        public DateTime DataDeadlineContractWithPerson
+        private Nullable<DateTime> _deadline = null;
+        public Nullable<DateTime> DateDeadLine
         {
-            get => _dataDeadline;
+            get
+            {
+                if (_deadline == null) _deadline = DateTime.Today;
+                return _deadline;
+            }
             set
             {
-                if (value == _dataDeadline) return;
-                _dataDeadline = value;
+                _deadline = value;
                 OnPropertyChanged();
             }
         }
@@ -97,6 +110,5 @@ namespace LabelBaseSys.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
     }
 }

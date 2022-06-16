@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LabelBaseSys.Properties
+namespace LabelSystem.Properties
 {
 
 

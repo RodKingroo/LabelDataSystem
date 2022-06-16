@@ -2,54 +2,70 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace LabelSystem.Models
+namespace LabelSystem.Model
 {
     public class ContractWithLabel : INotifyPropertyChanged
     {
-        private int _contractLabelID;
-        public int ContractLabelID
+
+        private int _id;
+        public int ContractWithLabelID
         {
-            get => _contractLabelID;
+            get => _id;
             set
             {
-                if (value == _contractLabelID) return;
-                _contractLabelID = value;
+                _id = value;
                 OnPropertyChanged();
             }
         }
 
-        private bool _enableContract;
-        public bool EnableContract
+        private bool _enable;
+        public bool ContractWithLabelEnableContract
         {
-            get => _enableContract;
+            get => _enable;
             set
             {
-                if (value == _enableContract) return;
-                _enableContract = value;
+                _enable = value;
                 OnPropertyChanged();
             }
         }
 
-        private DateTime _dataOfSingle;
-        public DateTime DataOfSingle
+        private string _namela;
+        public string NameLabel
         {
-            get => _dataOfSingle;
+            get => _namela;
             set
             {
-                if (value == _dataOfSingle) return;
-                _dataOfSingle = value;
+                _namela = value;
                 OnPropertyChanged();
             }
         }
 
-        private DateTime _dateDeadline;
-        public DateTime DateDeadline
+        private Nullable<DateTime> _single = null;
+        public Nullable<DateTime> ContractWithLabelDataOfSingle
         {
-            get => _dateDeadline;
+            get
+            {
+                if (_single == null) _single = DateTime.Today;
+                return _single;
+            }
             set
             {
-                if (value == _dateDeadline) return;
-                _dateDeadline = value;
+                _single = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Nullable<DateTime> _deadline = null;
+        public Nullable<DateTime> ContractWithLabelDataDeadline
+        {
+            get
+            {
+                if (_deadline == null) _deadline = DateTime.Today;
+                return _deadline;
+            }
+            set
+            {
+                _deadline = value;
                 OnPropertyChanged();
             }
         }
