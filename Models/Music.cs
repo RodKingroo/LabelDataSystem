@@ -17,8 +17,8 @@ namespace LabelSystem.Model
             }
         }
 
-        private int _personID;
-        public int TrackPersonID
+        private Person _personID;
+        public Person Person
         {
             get => _personID;
             set
@@ -39,13 +39,24 @@ namespace LabelSystem.Model
             }
         }
 
-        private int _priceID;
-        public int TrackPriceID
+        private Price _priceID;
+        public Price Price
         {
             get => _priceID;
             set
             {
                 _priceID = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ContractWithPerson _Cwp;
+        public ContractWithPerson CWP
+        {
+            get => _Cwp;
+            set
+            {
+                _Cwp = value;
                 OnPropertyChanged();
             }
         }
@@ -124,8 +135,8 @@ namespace LabelSystem.Model
             }
         }
 
-        private int _labelcontrackid;
-        public int LabelContrackID
+        private ContractWithLabel _labelcontrackid;
+        public ContractWithLabel CWL
         {
             get => _labelcontrackid;
             set

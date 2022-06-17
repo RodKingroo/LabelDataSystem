@@ -18,8 +18,8 @@ namespace LabelSystem.Model
             }
         }
 
-        private int _personID;
-        public int ContractWithPersonPID
+        private Person _personID;
+        public Person Person
         {
             get => _personID;
             set
@@ -85,6 +85,17 @@ namespace LabelSystem.Model
             set
             {
                 _price = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int _trackCWP;
+        public int TrackCWP
+        {
+            get => _trackCWP;
+            set
+            {
+                _trackCWP = value;
                 OnPropertyChanged();
             }
         }

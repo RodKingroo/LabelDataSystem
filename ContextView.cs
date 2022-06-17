@@ -11,6 +11,7 @@ namespace LabelSystem
     public class ContextView : INotifyPropertyChanged
     {
 
+
         public ObservableCollection<Person> Persons { get; }
         public ObservableCollection<ContractWithLabel> ContractWithLabels { get; }
         public ObservableCollection<ContractWithPerson> ContractWithPersons { get; }
@@ -179,6 +180,8 @@ namespace LabelSystem
             }
         }
 
+
+
         public ContextView(){
             Persons = new ObservableCollection<Person>() { };
             ContractWithLabels = new ObservableCollection<ContractWithLabel>() { };
@@ -186,6 +189,8 @@ namespace LabelSystem
             Musics = new ObservableCollection<Music>() { };
             ARManagers = new ObservableCollection<ARManager>() { };
             Prices = new ObservableCollection<Price>() { };
+
+            
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

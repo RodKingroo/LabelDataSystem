@@ -40,6 +40,17 @@ namespace LabelSystem.Model
             }
         }
 
+        private double _prcontract;
+        public double PriceContract
+        {
+            get => _prcontract;
+            set
+            {
+                _prcontract = value;
+                OnPropertyChanged();
+            }
+        }
+
         private Nullable<DateTime> _single = null;
         public Nullable<DateTime> ContractWithLabelDataOfSingle
         {

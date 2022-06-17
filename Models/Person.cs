@@ -5,6 +5,8 @@ namespace LabelSystem.Model
 {
     public class Person : INotifyPropertyChanged
     {
+
+
         private int _id;
         public int PersonID
         {
@@ -71,13 +73,13 @@ namespace LabelSystem.Model
             }
         }
 
-        private int _armanager;
-        public int PersonARManagerID
+        private ARManager _arManager;
+        public ARManager ARManager
         {
-            get => _armanager;
+            get => _arManager;
             set
             {
-                _armanager = value;
+                _arManager = value;
                 OnPropertyChanged();
             }
         }
