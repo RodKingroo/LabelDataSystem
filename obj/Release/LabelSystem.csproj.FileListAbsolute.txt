@@ -1,0 +1,16 @@
+D:\Project\Coursework\Курс. Проект САОД\LabelSystem\bin\Release\LabelSystem.exe.config
+D:\Project\Coursework\Курс. Проект САОД\LabelSystem\bin\Release\LabelSystem.exe
+D:\Project\Coursework\Курс. Проект САОД\LabelSystem\bin\Release\LabelSystem.pdb
+D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Release\LabelSystem.csproj.AssemblyReference.cache
+D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Release\LabelSystem.csproj.SuggestedBindingRedirects.cache
+D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Release\MainWindow.g.cs
+D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Release\App.g.cs
+D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Release\LabelSystem_MarkupCompile.cache
+D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Release\LabelSystem_MarkupCompile.lref
+D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Release\MainWindow.baml
+D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Release\LabelSystem.g.resources
+D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Release\LabelSystem.Properties.Resources.resources
+D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Release\LabelSystem.csproj.GenerateResource.cache
+D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Release\LabelSystem.csproj.CoreCompileInputs.cache
+D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Release\LabelSystem.exe
+D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Release\LabelSystem.pdb

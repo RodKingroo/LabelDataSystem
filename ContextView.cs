@@ -2,7 +2,8 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
+using System.IO;
+using System.Windows;
 
 using LabelSystem.Model;
 
@@ -180,7 +181,74 @@ namespace LabelSystem
             }
         }
 
+        private RelayCommand _saveButton;
+        public RelayCommand SaveButton
+        {
+            get
+            {
+                return _saveButton ?? (_saveButton = new RelayCommand(obj =>
+                {
+                    StreamWriter swPerson = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}/save/person.lbs", false);
+                    StreamWriter swMusic = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}/save/music.lbs", false);
+                    StreamWriter swCWP = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}/save/cwp.lbs", false);
+                    StreamWriter swCWL = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}/save/cwl.lbs", false);
+                    StreamWriter swARM = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}/save/arm.lbs", false);
+                    StreamWriter swPrice = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}/save/price.lbs", false);
 
+                    foreach (Person item in Persons)
+                    {
+                        string sandwich =   $"{item.PersonID};{item.PersonNickname};{item.PersonFirstname};{item.PersonSecondname};" +
+                                            $"{item.PersonContract};{item.PersonLabelMember};{item.ARManager.ARManagerID};";
+                        swPerson.WriteLine(sandwich);
+                    }
+                    foreach(Music item in Musics){
+                        string sandwich =   $"{item.TrackID};{item.CWP.Person.PersonID};{item.TrackTitle};{item.CWP.ContractWithPersonID};" +
+                                            $"{item.TrackCountAudition};{item.TrackCountSell};{item.TrackDataRec.Value.ToString("dd/MM/yyyy")};" +
+                                            $"{item.TrackDataRealise.Value.ToString("dd/MM/yyyy")};{item.EnableRadio};{item.PresenceInStore};" +
+                                            $"{item.CWL.ContractWithLabelID}";
+                        swMusic.WriteLine(sandwich);
+                    }
+
+                    foreach(ContractWithPerson item in ContractWithPersons)
+                    {
+                        string sandwich =   $"{item.ContractWithPersonID};{item.Person.PersonID};{item.ContractWithPersonEnable}" +
+                                            $"{item.ContractWithPersonDateOfSingle.Value.ToString("dd/MM/yyyy")};{item.ContractWithPersonCountTrackUnder}" +
+                                            $"{item.CountrackWithPersonCountReadyTrack};{item.ContractWithPersonPrice};" +
+                                            $"{item.TrackCWP};{item.DateDeadLine.Value.ToString("dd/MM/yyyy")}";
+                        swCWP.WriteLine(sandwich);
+                    }
+
+                    foreach(ContractWithLabel item in ContractWithLabels)
+                    {
+                        string sandwich =   $"{item.ContractWithLabelID};{item.ContractWithLabelEnableContract};{item.NameLabel};" +
+                                            $"{item.PriceContract};{item.ContractWithLabelDataOfSingle.Value.ToString("dd/MM/yyyy")};" +
+                                            $"{item.ContractWithLabelDataDeadline.Value.ToString("dd/MM/yyyy")}";
+                        swCWL.WriteLine(sandwich);
+                    }
+
+                    foreach(ARManager item in ARManagers)
+                    {
+                        string sandwich =   $"{item.ARManagerID};{item.Firstname};{item.Secondname}";
+                        swARM.WriteLine(sandwich);
+                    }
+
+                    foreach(Price item in Prices)
+                    {
+                        string sandwich =   $"{item.PriceID};{item.PriceSize}";
+                        swPrice.WriteLine(sandwich);
+                    }
+
+                    swPerson.Close();
+                    swMusic.Close();
+                    swCWP.Close();
+                    swCWL.Close();
+                    swARM.Close();
+                    swPrice.Close();
+
+                    MessageBox.Show("Сохранено!");
+                }));
+            }
+        }
 
         public ContextView(){
             Persons = new ObservableCollection<Person>() { };

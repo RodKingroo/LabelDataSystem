@@ -12,7 +12,7 @@
         ResizeMode="NoResize">
     <Grid>
         <TabControl>
-            <TabItem Header="Главная">
+            <TabItem Header="Просмотр">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -34,13 +34,12 @@
                     </GroupBox>
                     <GroupBox Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="5" Padding="5" Header="Информация о Исполнителе"/>
                     <GroupBox Grid.Column="1" Grid.Row="2" Grid.RowSpan="3" Margin="5" Padding="5" Header="Информация о треке"/>
-                    <Button Grid.Column="1" Grid.Row="5" Height="25" Margin="5,13,5,0" Content="Подробная информация .CSV" VerticalAlignment="Top"/>
-                    <Button Grid.Column="1" Grid.Row="5" Height="25" Margin="5,38,0,0" Content="Импорт информации" VerticalAlignment="Top" HorizontalAlignment="Left" Width="194"/>
-                    <Button Grid.Column="1" Grid.Row="5" Height="25" Margin="0,38,5,0" Content="Экспорт информации" VerticalAlignment="Top" HorizontalAlignment="Right" Width="194"/>
-                    <Button Grid.Column="1" Grid.Row="5" Height="25" Margin="5,63,5,0" Content="Сохранить" VerticalAlignment="Top"/>
+                    <Button Grid.Column="1" Grid.Row="5" Height="25" Margin="5,26,4,0" Content="Подробная информация .CSV" VerticalAlignment="Top"/>
+                    <Button Grid.Column="1" Grid.Row="5" Height="25" Margin="5,51,0,0" Content="Сохранить" VerticalAlignment="Top" HorizontalAlignment="Left" Width="194" Command="{Binding SaveButton}"/>
+                    <Button Grid.Column="1" Grid.Row="5" Height="25" Margin="0,51,4,0" Content="Загрузить" VerticalAlignment="Top" HorizontalAlignment="Right" Width="194" Command="{Binding LoadButton}"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Добавить">
+            <TabItem Header="Редактировать">
                 <Grid>
                     <TabControl>
                         <TabItem Header="Исполнители">
@@ -83,8 +82,7 @@
                                             <DataTemplate>
                                                 <TextBlock>
                                                     <TextBlock.Text>
-                                                        <MultiBinding StringFormat="{}{0}: {1} {2}">
-                                                            <Binding Path="ARManagerID"/>
+                                                        <MultiBinding StringFormat="{}{0} {1}">
                                                             <Binding Path="Firstname"/>
                                                             <Binding Path="Secondname"/>
                                                         </MultiBinding>
@@ -149,28 +147,14 @@
                                     <TextBlock Grid.Column="0" Grid.Row="11" Text="{Binding ElementName=MusicGrid, Path=Columns[11].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
 
                                     <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding SelectedMusics.TrackID}" Margin="5"/>
-                                    <ComboBox Grid.Column="1" Grid.Row="1" Margin="5,5,5,5" ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedMusics.Person}">
-                                        <ComboBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock>
-                                                    <TextBlock.Text>
-                                                        <MultiBinding StringFormat="{}{0}: {1}">
-                                                            <Binding Path="PersonID"/>
-                                                            <Binding Path="PersonNickname"/>
-                                                        </MultiBinding>
-                                                    </TextBlock.Text>
-                                                </TextBlock>
-                                            </DataTemplate>
-                                        </ComboBox.ItemTemplate>
-                                    </ComboBox>
+                                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SelectedMusics.CWP.Person.PersonNickname}" Margin="5" IsEnabled="False"/>
                                     <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding SelectedMusics.TrackTitle}" Margin="5"/>
                                     <ComboBox Grid.Column="1" Grid.Row="3" Margin="5,5,5,5" ItemsSource="{Binding Prices}" SelectedItem="{Binding SelectedMusics.Price}">
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate>
                                                 <TextBlock>
                                                     <TextBlock.Text>
-                                                        <MultiBinding StringFormat="{}{0}: {1}$">
-                                                            <Binding Path="PriceID"/>
+                                                        <MultiBinding StringFormat="{}{0}$">
                                                             <Binding Path="PriceSize"/>
                                                         </MultiBinding>
                                                     </TextBlock.Text>
@@ -183,8 +167,7 @@
                                             <DataTemplate>
                                                 <TextBlock>
                                                     <TextBlock.Text>
-                                                        <MultiBinding StringFormat="{}{0}: {1}">
-                                                            <Binding Path="ContractWithPersonID"/>
+                                                        <MultiBinding StringFormat="{}{0}">
                                                             <Binding Path="Person.PersonNickname"/>
                                                         </MultiBinding>
                                                     </TextBlock.Text>
@@ -203,8 +186,7 @@
                                             <DataTemplate>
                                                 <TextBlock>
                                                     <TextBlock.Text>
-                                                        <MultiBinding StringFormat="{}{0}: {1}">
-                                                            <Binding Path="ContractWithLabelID"/>
+                                                        <MultiBinding StringFormat="{}{0}">
                                                             <Binding Path="NameLabel"/>
                                                         </MultiBinding>
                                                     </TextBlock.Text>
@@ -217,7 +199,7 @@
                                 <DataGrid Name="MusicGrid" Grid.Column="1" Margin="0,10,10,10" AutoGenerateColumns="False" ItemsSource="{Binding Musics}" SelectedItem="{Binding SelectedMusics}">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="ID" Width="auto" Binding="{Binding TrackID}"/>
-                                        <DataGridTextColumn Header="Исполнитель" Width="auto" Binding="{Binding Person.PersonID}"/>
+                                        <DataGridTextColumn Header="Исполнитель" Width="auto" Binding="{Binding CWP.Person.PersonID}"/>
                                         <DataGridTextColumn Header="Название" Width="auto" Binding="{Binding TrackTitle}"/>
                                         <DataGridTextColumn Header="Стоимость" Width="auto" Binding="{Binding Price.PriceID}"/>
                                         <DataGridTextColumn Header="Принадлежит контракту" Width="auto" Binding="{Binding CWP.ContractWithPersonID}"/>
@@ -266,8 +248,7 @@
                                             <DataTemplate>
                                                 <TextBlock>
                                                     <TextBlock.Text>
-                                                        <MultiBinding StringFormat="{}{0}: {1}">
-                                                            <Binding Path="PersonID"/>
+                                                        <MultiBinding StringFormat="{}{0}">
                                                             <Binding Path="PersonNickname"/>
                                                         </MultiBinding>
                                                     </TextBlock.Text>

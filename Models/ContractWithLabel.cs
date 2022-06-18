@@ -56,7 +56,9 @@ namespace LabelSystem.Model
         {
             get
             {
-                if (_single == null) _single = DateTime.Today;
+                if (_single == null) { 
+                    _single = DateTime.Today;
+                }
                 return _single;
             }
             set
