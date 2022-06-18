@@ -78,24 +78,13 @@ namespace LabelSystem.Model
             }
         }
 
-        private int _price;
-        public int ContractWithPersonPrice
+        private double _price;
+        public double ContractWithPersonPrice
         {
             get=> _price;
             set
             {
                 _price = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private int _trackCWP;
-        public int TrackCWP
-        {
-            get => _trackCWP;
-            set
-            {
-                _trackCWP = value;
                 OnPropertyChanged();
             }
         }

@@ -17,17 +17,6 @@ namespace LabelSystem.Model
             }
         }
 
-        private Person _personID;
-        public Person Person
-        {
-            get => _personID;
-            set
-            {
-                _personID = value;
-                OnPropertyChanged();
-            }
-        }
-
         private string _title;
         public string TrackTitle
         {

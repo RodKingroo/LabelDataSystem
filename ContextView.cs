@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.IO;
+using System.Text;
 using System.Windows;
 
 using LabelSystem.Model;
@@ -198,7 +199,7 @@ namespace LabelSystem
                     foreach (Person item in Persons)
                     {
                         string sandwich =   $"{item.PersonID};{item.PersonNickname};{item.PersonFirstname};{item.PersonSecondname};" +
-                                            $"{item.PersonContract};{item.PersonLabelMember};{item.ARManager.ARManagerID};";
+                                            $"{item.PersonContract};{item.PersonLabelMember};{item.ARManager.ARManagerID}";
                         swPerson.WriteLine(sandwich);
                     }
                     foreach(Music item in Musics){
@@ -211,10 +212,10 @@ namespace LabelSystem
 
                     foreach(ContractWithPerson item in ContractWithPersons)
                     {
-                        string sandwich =   $"{item.ContractWithPersonID};{item.Person.PersonID};{item.ContractWithPersonEnable}" +
-                                            $"{item.ContractWithPersonDateOfSingle.Value.ToString("dd/MM/yyyy")};{item.ContractWithPersonCountTrackUnder}" +
+                        string sandwich =   $"{item.ContractWithPersonID};{item.Person.PersonID};{item.ContractWithPersonEnable};" +
+                                            $"{item.ContractWithPersonDateOfSingle.Value.ToString("dd/MM/yyyy")};{item.ContractWithPersonCountTrackUnder};" +
                                             $"{item.CountrackWithPersonCountReadyTrack};{item.ContractWithPersonPrice};" +
-                                            $"{item.TrackCWP};{item.DateDeadLine.Value.ToString("dd/MM/yyyy")}";
+                                            $"{item.DateDeadLine.Value.ToString("dd/MM/yyyy")}";
                         swCWP.WriteLine(sandwich);
                     }
 
@@ -246,6 +247,89 @@ namespace LabelSystem
                     swPrice.Close();
 
                     MessageBox.Show("Сохранено!");
+                }));
+            }
+        }
+
+        private RelayCommand _loadButton;
+        public RelayCommand LoadButton
+        {
+            get
+            {
+                return _loadButton ?? (_loadButton=new RelayCommand(obj =>
+                {
+                    StreamReader srPerson = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}//save/person.lbs");
+                    StreamReader srMusic = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}/save/music.lbs");
+                    StreamReader srCWP = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}/save/cwp.lbs");
+                    StreamReader srCWL = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}/save/cwl.lbs");
+                    StreamReader srARM = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}/save/arm.lbs");
+                    StreamReader srPrice = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}/save/price.lbs");
+
+                    string linePerson; string lineMusic; string lineCWP; string lineCWL; string lineARM; string linePrice;
+
+                    while ((lineARM = srARM.ReadLine()) != null)
+                    {
+                        string[] word = lineARM.Split(';');
+                        ARManager arm = new ARManager();
+                        arm.ARManagerID = int.Parse(word[0]); arm.Firstname = word[1]; arm.Secondname = word[2];
+                        ARManagers.Insert(ARManagers.Count, arm);
+                    }
+                    while ((linePrice = srPrice.ReadLine()) != null)
+                    {
+                        string[] word = linePrice.Split(';');
+                        Price p = new Price();
+                        p.PriceID = int.Parse(word[0]); p.PriceSize = double.Parse(word[1]);
+                        Prices.Insert(Prices.Count, p);
+                    }
+
+                    /*while ((linePerson = srPerson.ReadLine()) != null){
+
+                        string[] word = linePerson.Split(';');
+                        Person person = new Person();
+                        person.PersonID = int.Parse(word[0]); person.PersonNickname = word[1]; person.PersonFirstname = word[2];
+                        person.PersonSecondname = word[3]; person.PersonContract = word[4]; person.PersonLabelMember = bool.Parse(word[5]);
+                        person.ARManager.ARManagerID = int.Parse(word[6]);
+                        Persons.Insert(Persons.Count, person);
+                    }*/
+
+
+
+                    /*while ((lineCWP = srCWP.ReadLine()) != null)
+                    {
+                        string[] word = lineCWP.Split(';');
+                        ContractWithPerson cwp = new ContractWithPerson();
+                        cwp.ContractWithPersonID = int.Parse(word[0]); cwp.Person.PersonID = int.Parse(word[1]);
+                        cwp.ContractWithPersonEnable = bool.Parse(word[2]); 
+                        cwp.ContractWithPersonDateOfSingle = DateTime.Parse(word[3]);
+                        cwp.ContractWithPersonCountTrackUnder = int.Parse(word[4]);
+                        cwp.CountrackWithPersonCountReadyTrack = int.Parse(word[5]);
+                        cwp.ContractWithPersonPrice = double.Parse(word[6]);
+                        cwp.DateDeadLine = DateTime.Parse(word[7]);
+                        ContractWithPersons.Insert(ContractWithPersons.Count, cwp);
+                    }
+                    while((lineCWL = srCWL.ReadLine()) != null)
+                    {
+                        string[] word = lineCWL.Split(';');
+                        ContractWithLabel cwl = new ContractWithLabel();
+                        cwl.ContractWithLabelID = int.Parse(word[0]); cwl.ContractWithLabelEnableContract = bool.Parse(word[1]);
+                        cwl.NameLabel = word[2]; cwl.PriceContract = double.Parse(word[3]); cwl.ContractWithLabelDataOfSingle = DateTime.Parse(word[4]);
+                        cwl.ContractWithLabelDataOfSingle = DateTime.Parse(word[5]);
+                        ContractWithLabels.Insert(ContractWithLabels.Count, cwl);
+                    }
+
+                    while ((lineMusic = srMusic.ReadLine()) != null)
+                    {
+                        string[] word = lineMusic.Split(';');
+                        Music m = new Music();
+                        m.TrackID = int.Parse(word[0]); m.TrackTitle = word[1]; m.Price.PriceID = int.Parse(word[2]);
+                        m.CWP.ContractWithPersonID = int.Parse(word[3]); m.TrackCountAudition = int.Parse(word[4]);
+                        m.TrackCountSell = int.Parse(word[5]); m.TrackDataRec = DateTime.Parse(word[6]);
+                        m.TrackDataRealise = DateTime.Parse(word[7]); m.EnableRadio = bool.Parse(word[8]);
+                        m.PresenceInStore = bool.Parse(word[9]); m.CWL.ContractWithLabelID = int.Parse(word[10]);
+                        Musics.Insert(Musics.Count, m);
+                    }*/
+
+                    MessageBox.Show("Загружено!");
                 }));
             }
         }

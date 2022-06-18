@@ -233,6 +233,7 @@
                                         <RowDefinition Height="auto"/>
                                         <RowDefinition Height="auto"/>
                                         <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[0].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
                                     <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[1].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
@@ -241,6 +242,7 @@
                                     <TextBlock Grid.Column="0" Grid.Row="4" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[4].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
                                     <TextBlock Grid.Column="0" Grid.Row="5" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[5].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
                                     <TextBlock Grid.Column="0" Grid.Row="6" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[6].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="7" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[7].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
 
                                     <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding SelectedContractWithPersons.ContractWithPersonID}" Margin="5"/>
                                     <ComboBox Grid.Column="1" Grid.Row="1" Margin="5,5,5,5" ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedContractWithPersons.Person}">
@@ -260,7 +262,8 @@
                                     <DatePicker Grid.Column="1" Grid.Row="3" SelectedDateFormat="Long" SelectedDate="{Binding SelectedContractWithPersons.ContractWithPersonDateOfSingle}" Margin="5" FirstDayOfWeek="Monday" DisplayDateStart="2000-01-01"/>
                                     <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding  SelectedContractWithPersons.ContractWithPersonCountTrackUnder}" Margin="5"/>
                                     <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding SelectedContractWithPersons.CountrackWithPersonCountReadyTrack}" Margin="5"/>
-                                    <DatePicker Grid.Column="1" Grid.Row="6" SelectedDateFormat="Long" SelectedDate="{Binding SelectedContractWithPersons.DateDeadLine}" Margin="5" FirstDayOfWeek="Monday" DisplayDateStart="2000-01-01"/>
+                                    <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding SelectedContractWithPersons.ContractWithPersonPrice}" Margin="5"/>
+                                    <DatePicker Grid.Column="1" Grid.Row="7" SelectedDateFormat="Long" SelectedDate="{Binding SelectedContractWithPersons.DateDeadLine}" Margin="5" FirstDayOfWeek="Monday" DisplayDateStart="2000-01-01"/>
 
                                 </Grid>
                                 <Button Margin="15,0,15,10" Content="Добавить" Height="25" VerticalAlignment="Bottom" Command="{Binding AddContractWithPerson}"/>
@@ -272,6 +275,7 @@
                                         <DataGridTextColumn Header="Дата подписания" Width="auto" Binding="{Binding ContractWithPersonDateOfSingle, StringFormat='dd/MM/yyyy'}"/>
                                         <DataGridTextColumn Header="Кол-во треков" Width="auto" Binding="{Binding ContractWithPersonCountTrackUnder}"/>
                                         <DataGridTextColumn Header="Кол-во готовых треков" Width="auto" Binding="{Binding CountrackWithPersonCountReadyTrack}"/>
+                                        <DataGridTextColumn Header="Цена контракта" Width="auto" Binding="{Binding ContractWithPersonPrice}"/>
                                         <DataGridTextColumn Header="Дата окончания" Width="auto" Binding="{Binding DateDeadLine, StringFormat='dd/MM/yyyy'}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
