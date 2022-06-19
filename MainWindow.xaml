@@ -37,6 +37,8 @@
                     <Button Grid.Column="1" Grid.Row="5" Height="25" Margin="5,26,4,0" Content="Подробная информация .CSV" VerticalAlignment="Top"/>
                     <Button Grid.Column="1" Grid.Row="5" Height="25" Margin="5,51,0,0" Content="Сохранить" VerticalAlignment="Top" HorizontalAlignment="Left" Width="194" Command="{Binding SaveButton}"/>
                     <Button Grid.Column="1" Grid.Row="5" Height="25" Margin="0,51,4,0" Content="Загрузить" VerticalAlignment="Top" HorizontalAlignment="Right" Width="194" Command="{Binding LoadButton}"/>
+                    <Button Grid.Column="1" Grid.Row="5" Height="25" Margin="5,1,0,0" Content="Экспорт" VerticalAlignment="Top" HorizontalAlignment="Left" Width="194" Command="{Binding ExportButton}"/>
+                    <Button Grid.Column="1" Grid.Row="5" Height="25" Margin="0,1,4,0" Content="Импорт" VerticalAlignment="Top" HorizontalAlignment="Right" Width="194" Command="{Binding ImportButton}"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Редактировать">
@@ -77,7 +79,7 @@
                                     <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding SelectedPersons.PersonSecondname}" Margin="5"/>
                                     <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding SelectedPersons.PersonContract}" Margin="5"/>
                                     <CheckBox Grid.Column="1" Grid.Row="5" Content="{Binding SelectedPersons.PersonLabelMember}" IsChecked="{Binding SelectedPersons.PersonLabelMember}" Margin="5"/>
-                                    <ComboBox Grid.Column="1" Grid.Row="6" Margin="5,5,5,5" ItemsSource="{Binding ARManagers}" SelectedItem="{Binding SelectedPersons.ARManager}">
+                                    <ComboBox Name="ComboBoxARMID"  Grid.Column="1" Grid.Row="6" Margin="5,5,5,5" ItemsSource="{Binding ARManagers}" SelectedItem="{Binding SelectedPersons.ARManager}">
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate>
                                                 <TextBlock>

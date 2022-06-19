@@ -84,6 +84,16 @@ namespace LabelSystem.Model
             }
         }
 
+        public int ARMID
+        {
+            get => _arManager.ARManagerID;
+            set
+            {
+                _arManager.ARManagerID = value;
+                OnPropertyChanged();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
