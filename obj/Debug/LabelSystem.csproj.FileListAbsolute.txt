@@ -3,11 +3,10 @@ D:\Project\Coursework\Курс. Проект САОД\LabelSystem\bin\Debug\Labe
 D:\Project\Coursework\Курс. Проект САОД\LabelSystem\bin\Debug\LabelSystem.pdb
 D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Debug\LabelSystem.csproj.AssemblyReference.cache
 D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Debug\LabelSystem.csproj.SuggestedBindingRedirects.cache
+D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Debug\MainWindow.baml
 D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Debug\MainWindow.g.cs
 D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Debug\App.g.cs
 D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Debug\LabelSystem_MarkupCompile.cache
-D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Debug\LabelSystem_MarkupCompile.lref
-D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Debug\MainWindow.baml
 D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Debug\LabelSystem.g.resources
 D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Debug\LabelSystem.Properties.Resources.resources
 D:\Project\Coursework\Курс. Проект САОД\LabelSystem\obj\Debug\LabelSystem.csproj.GenerateResource.cache

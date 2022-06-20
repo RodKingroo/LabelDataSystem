@@ -50,6 +50,17 @@ namespace LabelSystem.Model
             }
         }
 
+        private double _expens;
+        public double Expens
+        {
+            get => _expens;
+            set
+            {
+                _expens = value;
+                OnPropertyChanged();
+            }
+        }
+
         private int _audition;
         public int TrackCountAudition
         {

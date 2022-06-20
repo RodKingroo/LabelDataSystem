@@ -81,7 +81,7 @@ namespace LabelSystem.Model
         private double _price;
         public double ContractWithPersonPrice
         {
-            get=> _price;
+            get => _price;
             set
             {
                 _price = value;

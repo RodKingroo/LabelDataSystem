@@ -18,17 +18,6 @@ namespace LabelSystem.Model
             }
         }
 
-        private bool _enable;
-        public bool ContractWithLabelEnableContract
-        {
-            get => _enable;
-            set
-            {
-                _enable = value;
-                OnPropertyChanged();
-            }
-        }
-
         private string _namela;
         public string NameLabel
         {
@@ -56,7 +45,8 @@ namespace LabelSystem.Model
         {
             get
             {
-                if (_single == null) { 
+                if (_single == null)
+                {
                     _single = DateTime.Today;
                 }
                 return _single;

@@ -1,2 +1,11 @@
-﻿ID;Псевдоним;Имя;Фамилия;Контактные данные;Участник;Пригласивший AR менеджер
-91530;ОУДИ;Руслан;Диолетов;@Diolet;True;33759
+﻿ID;Псевдоним;Имя;Фамилия;Контактные данные;A&R менеджер;Участник лейбла
+1;Temphraharny;София;Осипова;TemphSofa;1;True
+2;Aevene;Демьян;Абрамов;AevenDem;4;True
+3;Naleynance;Матвей;Волков;NaleynMa;3;True
+4;Andic;Эмилия;Соболева;Andimilia;2;True
+5;Yalaningeli;Таисия;Николаева;YalaTasia;4;False
+6;Honysius;Варвара;Коршунова;HonyVara;3;False
+7;Olaningstony;Вероника;Наумова;OlaninVer;2;True
+8;Damiak;Александр;Воронин;DamiAlex;4;True
+9;Piersepper;Владимир;Смирнов;Piersevlad;5;False
+10;Cassie;Анна ;Кузина;CasstleKyz;2;False
