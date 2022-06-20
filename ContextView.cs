@@ -185,71 +185,78 @@ namespace LabelSystem
             {
                 return _export ?? (_export = new RelayCommand(obj =>
                 {
-                    StreamWriter swPerson = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}/export/person.csv", false, Encoding.UTF8);
-                    StreamWriter swMusic = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}/export/music.csv", false, Encoding.UTF8);
-                    StreamWriter swCWP = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}/export/cwp.csv", false, Encoding.UTF8);
-                    StreamWriter swCWL = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}/export/cwl.csv", false, Encoding.UTF8);
-                    StreamWriter swARM = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}/export/arm.csv", false, Encoding.UTF8);
-                    StreamWriter swPrice = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}/export/price.csv", false, Encoding.UTF8);
-
-                    swPerson.WriteLine("ID;Псевдоним;Имя;Фамилия;Контактные данные;Участник;Пригласивший AR менеджер");
-                    swMusic.WriteLine("ID;Псевдоним создателя;Название;Принадлежность контракту;Кол-во прослушиваний;Кол-во покупок;Дата записи;Дата релиза;Звучит на радио;Продается;Арендовано");
-                    swCWP.WriteLine("ID;Чей контракт;Действительность;Дата подписания;Кол-во треков на контракт;Кол-во готовых треков;Стоимость контракта;Дедлайн");
-                    swCWL.WriteLine("ID;Действительность;Название компании;Стоимость аренды;Дата подписания;Дедлайн");
-                    swARM.WriteLine("ID;Имя;Фамилия");
-                    swPrice.WriteLine("ID;Стоимость");
-
-                    foreach (Person item in Persons)
-                    {
-
-                        string sandwich = $"{item.PersonID};{item.PersonNickname};{item.PersonFirstname};{item.PersonSecondname};" +
-                                            $"{item.PersonContract};{item.ARManager.ARManagerID};{item.PersonLabelMember}";
-                        swPerson.WriteLine(sandwich);
-                    }
-                    foreach (Music item in Musics)
-                    {
-                        string sandwich = $"{item.TrackID};{item.CWP.Person.PersonID};{item.TrackTitle};{item.CWP.ContractWithPersonID};" +
-                                            $"{item.TrackCountAudition};{item.TrackCountSell};{item.TrackDataRec.Value.ToString("dd/MM/yyyy")};" +
-                                            $"{item.TrackDataRealise.Value.ToString("dd/MM/yyyy")};{item.EnableRadio};{item.PresenceInStore};" +
-                                            $"{item.CWL.ContractWithLabelID}";
-                        swMusic.WriteLine(sandwich);
+                    using(StreamWriter swPerson = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}/export/person.csv", false, Encoding.UTF8)) {
+                        swPerson.WriteLine("ID;Псевдоним;Имя;Фамилия;Контактные данные;A&R менеджер;Участник лейбла");
+                        foreach (Person item in Persons)
+                        {
+                            string sandwich = $"{item.PersonID};{item.PersonNickname};{item.PersonFirstname};{item.PersonSecondname};" +
+                                                $"{item.PersonContract};{item.ARManager.ARManagerID};{item.PersonLabelMember}";
+                            swPerson.WriteLine(sandwich);
+                        }
+                        swPerson.Close();
                     }
 
-                    foreach (ContractWithPerson item in ContractWithPersons)
-                    {
-                        string sandwich = $"{item.ContractWithPersonID};{item.Person.PersonID};{item.ContractWithPersonEnable};" +
-                                            $"{item.ContractWithPersonDateOfSingle.Value.ToString("dd/MM/yyyy")};{item.ContractWithPersonCountTrackUnder};" +
-                                            $"{item.CountrackWithPersonCountReadyTrack};{item.ContractWithPersonPrice};" +
-                                            $"{item.DateDeadLine.Value.ToString("dd/MM/yyyy")}";
-                        swCWP.WriteLine(sandwich);
+                    using (StreamWriter swMusic = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}/export/music.csv", false, Encoding.UTF8)){
+                        swMusic.WriteLine("ID;Название;Стоимость;Исполнитель;Затраты;Количество прослушиваний;Количество продаж;Дата записи;Дата релиза;Воспроизведение на радио;Продажа в магазине;Контракт по аренде");
+                        foreach (Music item in Musics)
+                        {
+                            string sandwich = $"{item.TrackID};{item.TrackTitle};{item.Price.PriceID};{item.Person.PersonID};" +
+                                                $"{item.Expens};{item.TrackCountAudition};{item.TrackCountSell};" +
+                                                $"{item.TrackDataRec.Value.ToString("dd/MM/yyyy")};" +
+                                                $"{item.TrackDataRealise.Value.ToString("dd/MM/yyyy")};" +
+                                                $"{item.EnableRadio};{item.PresenceInStore};{item.CWL.ContractWithLabelID}";
+                            swMusic.WriteLine(sandwich);
+                        }
+                        swMusic.Close();
                     }
 
-                    foreach (ContractWithLabel item in ContractWithLabels)
-                    {
-                        string sandwich = $"{item.ContractWithLabelID};{item.NameLabel};{item.PriceContract};" +
-                                            $"{item.ContractWithLabelDataOfSingle.Value.ToString("dd/MM/yyyy")};" +
-                                            $"{item.ContractWithLabelDataDeadline.Value.ToString("dd/MM/yyyy")}";
-                        swCWL.WriteLine(sandwich);
+                    using (StreamWriter swCWP = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}/export/cwp.csv", false, Encoding.UTF8)) {
+                        swCWP.WriteLine("ID;Исполнитель;Действительность контракта;Дата подписания;Количество треков,прописанных в контракте;Количество готовых треков;Стоимость сотрудничества;Дата Окончания");
+                        foreach (ContractWithPerson item in ContractWithPersons)
+                        {
+                            string sandwich = $"{item.ContractWithPersonID};{item.Person.PersonID};{item.ContractWithPersonEnable};" +
+                                                $"{item.ContractWithPersonDateOfSingle.Value.ToString("dd/MM/yyyy")};{item.ContractWithPersonCountTrackUnder};" +
+                                                $"{item.CountrackWithPersonCountReadyTrack};{item.ContractWithPersonPrice};" +
+                                                $"{item.DateDeadLine.Value.ToString("dd/MM/yyyy")}";
+                            swCWP.WriteLine(sandwich);
+                        }
+                        swCWP.Close();
                     }
 
-                    foreach (ARManager item in ARManagers)
+                    using (StreamWriter swCWL = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}/export/cwl.csv", false, Encoding.UTF8))
                     {
-                        string sandwich = $"{item.ARManagerID};{item.Firstname};{item.Secondname}";
-                        swARM.WriteLine(sandwich);
+                        swCWL.WriteLine("ID;Названия компаний;Стоимость;Дата Подписания;Дата окончания контракта");
+                        foreach (ContractWithLabel item in ContractWithLabels)
+                        {
+                            string sandwich = $"{item.ContractWithLabelID};{item.NameLabel};{item.PriceContract};" +
+                                                $"{item.ContractWithLabelDataOfSingle.Value.ToString("dd/MM/yyyy")};" +
+                                                $"{item.ContractWithLabelDataDeadline.Value.ToString("dd/MM/yyyy")}";
+                            swCWL.WriteLine(sandwich);
+                        }
+                        swCWL.Close();
                     }
 
-                    foreach (Price item in Prices)
+                    using (StreamWriter swARM = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}/export/arm.csv", false, Encoding.UTF8))
                     {
-                        string sandwich = $"{item.PriceID};{item.PriceSize}";
-                        swPrice.WriteLine(sandwich);
+                        swARM.WriteLine("ID;Имя;Фамилия");
+                        foreach (ARManager item in ARManagers)
+                        {
+                            string sandwich = $"{item.ARManagerID};{item.Firstname};{item.Secondname}";
+                            swARM.WriteLine(sandwich);
+                        }
+                        swARM.Close();
                     }
 
-                    swPerson.Close();
-                    swMusic.Close();
-                    swCWP.Close();
-                    swCWL.Close();
-                    swARM.Close();
+                    using (StreamWriter swPrice = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}/export/price.csv", false, Encoding.UTF8))
+                    {
+                        swPrice.WriteLine("ID;Стоимость");
+                        foreach (Price item in Prices)
+                        {
+                            string sandwich = $"{item.PriceID};{item.PriceSize}";
+                            swPrice.WriteLine(sandwich);
+                        }
                     swPrice.Close();
+                    }
 
                     Process.Start($"{AppDomain.CurrentDomain.BaseDirectory}/export/");
 
@@ -264,19 +271,9 @@ namespace LabelSystem
             {
                 return _importButton ?? (_importButton = new RelayCommand(obj =>
                 {
-                    StreamReader srMusic = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}/export/music.csv");
-                    StreamReader srCWP = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}/export/ContractWithPerson.csv");
-
-
                     string linePerson, lineMusic, lineCWP, lineCWL, lineARM, linePrice;
-
                     
-                    lineMusic = srMusic.ReadLine();
-                    lineCWP = srCWP.ReadLine();
-                    
-                    
-                    
-                    using (StreamReader srARM = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}/export/ARMan.csv")) { 
+                    using (StreamReader srARM = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}/import/ARMan.csv")) { 
                         lineARM = srARM.ReadLine();
                         while ((lineARM = srARM.ReadLine()) != null)
                         {
@@ -289,7 +286,7 @@ namespace LabelSystem
                         srARM.Close();
                     }
 
-                    using(StreamReader srPrice = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}/export/price.csv")) {
+                    using(StreamReader srPrice = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}/import/price.csv")) {
                         linePrice = srPrice.ReadLine();
                         while ((linePrice = srPrice.ReadLine()) != null)
                         {
@@ -302,7 +299,7 @@ namespace LabelSystem
                         srPrice.Close();
                     }
 
-                    using (StreamReader srCWL = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}/export/ContractWithLabel.csv")) { 
+                    using (StreamReader srCWL = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}/import/ContractWithLabel.csv")) { 
                         lineCWL = srCWL.ReadLine();
                         while ((lineCWL = srCWL.ReadLine()) != null)
                         {
@@ -319,7 +316,7 @@ namespace LabelSystem
                         srCWL.Close();
                     }
 
-                    using (StreamReader srPerson = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}/export/person.csv")) {
+                    using (StreamReader srPerson = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}/import/person.csv")) {
                         linePerson = srPerson.ReadLine();
                         while ((linePerson = srPerson.ReadLine()) != null)
                         {
@@ -333,16 +330,77 @@ namespace LabelSystem
                             }
                             p.PersonLabelMember = bool.Parse(word[6]);
 
-
                             Persons.Add(p);
                             SelectedPersons = p;
                         }
                         srPerson.Close();
                     }
                     
-                    srMusic.Close();
-                    srCWP.Close();   
+                    using(StreamReader srCWP = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}/import/ContractWithPerson.csv"))
+                    {
+                        lineCWP = srCWP.ReadLine();
+
+                        while ((lineCWP = srCWP.ReadLine()) != null)
+                        {
+                            string[] word = lineCWP.Split(';');
+                            ContractWithPerson cwp = new ContractWithPerson();
+
+                            cwp.ContractWithPersonID = int.Parse(word[0]);
+                            foreach(Person item in Persons)
+                            {
+                                if (item.PersonID == int.Parse(word[1])) cwp.Person = item;
+                            }
+                            cwp.ContractWithPersonEnable = bool.Parse(word[2]);
+                            cwp.ContractWithPersonDateOfSingle = DateTime.ParseExact(word[3], "dd.MM.yyyy", CultureInfo.InvariantCulture);
+                            cwp.ContractWithPersonCountTrackUnder = int.Parse(word[4]);
+                            cwp.CountrackWithPersonCountReadyTrack = int.Parse(word[5]);
+                            cwp.ContractWithPersonPrice = int.Parse(word[6]);
+                            cwp.DateDeadLine = DateTime.ParseExact(word[7], "dd.MM.yyyy", CultureInfo.InvariantCulture);
+
+                            ContractWithPersons.Add(cwp);
+                            SelectedContractWithPersons = cwp;
+                        }
+
+                        srCWP.Close();
+                    }
+                    using (StreamReader srMusic = new StreamReader($"{AppDomain.CurrentDomain.BaseDirectory}/import/Music.csv")) {
+                        lineMusic = srMusic.ReadLine();
+
+                        while ((lineMusic = srMusic.ReadLine()) != null)
+                        {
+                            string[] word = lineMusic.Split(';');
+                            Music m = new Music();
+
+                            m.TrackID = int.Parse(word[0]);
+                            m.TrackTitle = word[1];
+                            foreach(Price item in Prices)
+                            {
+                                if (item.PriceID == int.Parse(word[2])) m.Price = item;
+                            }
+                            foreach(Person item in Persons)
+                            {
+                                if (item.PersonID == int.Parse(word[3])) m.Person = item;
+                            }
+                            m.Expens = int.Parse(word[4]);
+                            m.TrackCountAudition = int.Parse(word[5]);
+                            m.TrackCountSell = int.Parse(word[6]);
+                            m.TrackDataRec = DateTime.ParseExact(word[7], "dd.MM.yyyy", CultureInfo.InvariantCulture);
+                            m.TrackDataRealise = DateTime.ParseExact(word[8], "dd.MM.yyyy", CultureInfo.InvariantCulture);
+                            m.EnableRadio = bool.Parse(word[9]);
+                            m.PresenceInStore = bool.Parse(word[10]);
+                            foreach(ContractWithLabel item in ContractWithLabels)
+                            {
+                                if (item.ContractWithLabelID == int.Parse(word[11])) m.CWL = item;
+                            }
+
+                            Musics.Add(m);
+                            SelectedMusics = m;
+                        }
+
+                        srMusic.Close();
+                    }
                     
+
                     MessageBox.Show("Загружено!");
                 }));
             }

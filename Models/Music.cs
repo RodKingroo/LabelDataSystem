@@ -39,13 +39,13 @@ namespace LabelSystem.Model
             }
         }
 
-        private ContractWithPerson _Cwp;
-        public ContractWithPerson CWP
+        private Person _person;
+        public Person Person
         {
-            get => _Cwp;
+            get => _person;
             set
             {
-                _Cwp = value;
+                _person = value;
                 OnPropertyChanged();
             }
         }

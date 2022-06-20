@@ -159,13 +159,13 @@
                                             </DataTemplate>
                                         </ComboBox.ItemTemplate>
                                     </ComboBox>
-                                    <ComboBox Grid.Column="1" Grid.Row="3" Margin="5,5,5,5" ItemsSource="{Binding ContractWithPersons}" SelectedItem="{Binding SelectedMusics.CWP}">
+                                    <ComboBox Grid.Column="1" Grid.Row="3" Margin="5,5,5,5" ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedMusics.Person}">
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate>
                                                 <TextBlock>
                                                     <TextBlock.Text>
                                                         <MultiBinding StringFormat="{}{0}">
-                                                            <Binding Path="Person.PersonNickname"/>
+                                                            <Binding Path="PersonNickname"/>
                                                         </MultiBinding>
                                                     </TextBlock.Text>
                                                 </TextBlock>
@@ -199,7 +199,7 @@
                                         <DataGridTextColumn Header="ID" Width="auto" Binding="{Binding TrackID}"/>
                                         <DataGridTextColumn Header="Название" Width="auto" Binding="{Binding TrackTitle}"/>
                                         <DataGridTextColumn Header="Стоимость" Width="auto" Binding="{Binding Price.PriceID}"/>
-                                        <DataGridTextColumn Header="Принадлежит контракту" Width="auto" Binding="{Binding CWP.ContractWithPersonID}"/>
+                                        <DataGridTextColumn Header="Исполнитель" Width="auto" Binding="{Binding Person.PersonID}"/>
                                         <DataGridTextColumn Header="Затраты" Width="auto" Binding="{Binding Expens}"/>
                                         <DataGridTextColumn Header="Кол-во прослушиваний" Width="auto" Binding="{Binding TrackCountAudition}"/>
                                         <DataGridTextColumn Header="Кол-во продаж" Width="auto" Binding="{Binding TrackCountSell}"/>
