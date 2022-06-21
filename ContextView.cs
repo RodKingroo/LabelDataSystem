@@ -13,8 +13,6 @@ namespace LabelSystem
 {
     public class ContextView : INotifyPropertyChanged
     {
-
-
         public ObservableCollection<Person> Persons { get; }
         public ObservableCollection<ContractWithLabel> ContractWithLabels { get; }
         public ObservableCollection<ContractWithPerson> ContractWithPersons { get; }
@@ -117,6 +115,59 @@ namespace LabelSystem
             }
         }
 
+        private RelayCommand _infoButton;
+        public RelayCommand InfoButton
+        {
+            get
+            {
+                return _infoButton ?? (_infoButton = new RelayCommand(obj =>
+                {
+                    Random r = new Random();
+                    using(StreamWriter swInfo = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}/information/{r.Next()}.rtf", false, Encoding.UTF8))
+                    {
+                        double income, allincome = 0, cleanincome=0, pricePerson = 0;
+                        swInfo.WriteLine($"Количество учатсников лейбла: {Persons.Count}");
+                        swInfo.WriteLine("\nСписок участников: ");
+                        foreach (Person p in Persons)
+                        {
+                            
+                            swInfo.WriteLine($"\t{p.PersonNickname} ({p.PersonFirstname} {p.PersonSecondname})");
+                            foreach (Music m in Musics)
+                            {
+                                
+                                if (p.PersonID == m.Person.PersonID)
+                                {
+                                    income = (m.Price.PriceSize*m.TrackCountSell)+(m.TrackCountAudition*0.0015);
+                                    swInfo.WriteLine($"\t\t{m.TrackTitle}. — Доход с трека: {Math.Round(income,2)}$.");
+
+                                    allincome += income-m.Expens;
+                                }
+                                
+                            }
+                            
+                            foreach (ContractWithPerson cwp in ContractWithPersons)
+                            {
+                                if (p.PersonID == cwp.Person.PersonID) pricePerson = cwp.ContractWithPersonPrice;
+
+                            }
+                            cleanincome = allincome - pricePerson;
+                            swInfo.WriteLine($"\n\t\t\t\tОбщий доход: {Math.Round(allincome, 2)}$");
+                            swInfo.WriteLine($"\t\t\t\tПрайс исполнителя: {pricePerson}$");
+                            swInfo.WriteLine($"\t\t\t\tЧистый доход: {Math.Round(cleanincome, 2)}$\n");
+
+                            allincome += allincome;
+                            cleanincome += cleanincome;
+                        }
+
+                        swInfo.WriteLine($"Общий доход лейбла: {Math.Round(allincome,2)}$");
+                        swInfo.WriteLine($"Чистая прибыль: {Math.Round(cleanincome,2)}$");
+
+                    }
+                    Process.Start($"{AppDomain.CurrentDomain.BaseDirectory}/information/");
+                }));
+            }
+        }
+
         private RelayCommand _addContractwithperson;
         public RelayCommand AddContractWithPerson
         {
@@ -143,6 +194,7 @@ namespace LabelSystem
                     arm.ARManagerID = ARManagers.Count + 1;
                     ARManagers.Add(arm);
                     SelectedARManager = arm;
+
                 }));
             }
         }
@@ -399,9 +451,19 @@ namespace LabelSystem
 
                         srMusic.Close();
                     }
-                    
+                }));
+            }
+        }
 
-                    MessageBox.Show("Загружено!");
+        private RelayCommand _cleanButton;
+        public RelayCommand NewTableButton
+        {
+            get
+            {
+                return _cleanButton ?? (_cleanButton = new RelayCommand(obj =>
+                {
+                    Persons.Clear(); ARManagers.Clear(); Musics.Clear(); Prices.Clear();
+                    ContractWithLabels.Clear(); ContractWithPersons.Clear();
                 }));
             }
         }
@@ -414,8 +476,6 @@ namespace LabelSystem
             Musics = new ObservableCollection<Music>() { };
             ARManagers = new ObservableCollection<ARManager>() { };
             Prices = new ObservableCollection<Price>() { };
-
-
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

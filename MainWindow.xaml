@@ -3,395 +3,370 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" Title="LabelSystem" Height="600" Width="800" 
+        mc:Ignorable="d" Title="LabelSystem" Height="625" Width="800" 
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        <TabControl>
-            <TabItem Header="Просмотр">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Button Height="25" Margin="0,5,5,5" Content="Экспорт" Command="{Binding ExportButton}" HorizontalAlignment="Right" Width="76"/>
+            <Button Height="25" Margin="0,5,86,5" Content="Импорт" Command="{Binding ImportButton}" HorizontalAlignment="Right" Width="75"/>
+            <Button Margin="5,5,0,5" Content="Очистить" Command="{Binding NewTableButton}" HorizontalAlignment="Left" Width="75"/>
+            <Button Height="25" Margin="492,5,166,5" Content="Подробная информация" Command="{Binding InfoButton}"/>
+        </Grid>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Исполнители">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <GroupBox Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Padding="5" Header="Исполнители">
-                        <TreeView  Margin="5"/>
-                    </GroupBox>
-                    <GroupBox Grid.Column="0" Grid.Row="3" Grid.RowSpan="3" Padding="5" Header="Треки">
-                        <ListBox Margin="5"/>
-                    </GroupBox>
-                    <GroupBox Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="5" Padding="5" Header="Информация о Исполнителе"/>
-                    <GroupBox Grid.Column="1" Grid.Row="2" Grid.RowSpan="3" Margin="5" Padding="5" Header="Информация о треке"/>
-                    <Button Grid.Column="1" Grid.Row="5" Height="25" Margin="5,26,4,0" Content="Подробный отчёт" VerticalAlignment="Top"/>
-                    <Button Grid.Column="1" Grid.Row="5" Height="25" Margin="5,51,0,0" Content="Сохранить" VerticalAlignment="Top" HorizontalAlignment="Left" Width="194" Command="{Binding SaveButton}"/>
-                    <Button Grid.Column="1" Grid.Row="5" Height="25" Margin="0,51,4,0" Content="Загрузить" VerticalAlignment="Top" HorizontalAlignment="Right" Width="194" Command="{Binding LoadButton}"/>
-                    <Button Grid.Column="1" Grid.Row="5" Height="25" Margin="5,1,0,0" Content="Экспорт" VerticalAlignment="Top" HorizontalAlignment="Left" Width="194" Command="{Binding ExportButton}"/>
-                    <Button Grid.Column="1" Grid.Row="5" Height="25" Margin="0,1,4,0" Content="Импорт" VerticalAlignment="Top" HorizontalAlignment="Right" Width="194" Command="{Binding ImportButton}"/>
+
+                    <Grid Grid.Column="0" Margin="15,15,15,51">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding ElementName=PersonGrid, Path=Columns[0].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding ElementName=PersonGrid, Path=Columns[1].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding ElementName=PersonGrid, Path=Columns[2].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding ElementName=PersonGrid, Path=Columns[3].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="4" Text="{Binding ElementName=PersonGrid, Path=Columns[4].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="5" Text="{Binding ElementName=PersonGrid, Path=Columns[5].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="6" Text="{Binding ElementName=PersonGrid, Path=Columns[6].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+
+                        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding SelectedPersons.PersonID}" Margin="5"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SelectedPersons.PersonNickname}" Margin="5"/>
+                        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding SelectedPersons.PersonFirstname}" Margin="5"/>
+                        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding SelectedPersons.PersonSecondname}" Margin="5"/>
+                        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding SelectedPersons.PersonContract}" Margin="5"/>
+                        <CheckBox Grid.Column="1" Grid.Row="5" Content="{Binding SelectedPersons.PersonLabelMember}" IsChecked="{Binding SelectedPersons.PersonLabelMember}" Margin="5"/>
+                        <ComboBox Name="ComboBoxARMID" IsSynchronizedWithCurrentItem="True" Grid.Column="1" Grid.Row="6" Margin="5,5,5,5" ItemsSource="{Binding ARManagers}" SelectedItem="{Binding SelectedPersons.ARManager}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} {1}">
+                                                <Binding Path="Firstname"/>
+                                                <Binding Path="Secondname"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+                    <Button Margin="15,0,15,10" Content="Добавить" Command="{Binding AddPersonButton}" Height="25" VerticalAlignment="Bottom"/>
+                    <DataGrid Name="PersonGrid" Grid.Column="1" Margin="0,10,10,10" AutoGenerateColumns="False" ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedPersons}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Width="auto" Binding="{Binding PersonID}"/>
+                            <DataGridTextColumn Header="Псевдоним" Width="auto" Binding="{Binding PersonNickname}"/>
+                            <DataGridTextColumn Header="Имя" Width="auto" Binding="{Binding PersonFirstname}"/>
+                            <DataGridTextColumn Header="Фамилия" Width="auto" Binding="{Binding PersonSecondname}"/>
+                            <DataGridTextColumn Header="Контакт" Width="auto" Binding="{Binding PersonContract}"/>
+                            <DataGridCheckBoxColumn Header="Участник лейбла" Width="auto" Binding="{Binding PersonLabelMember}"/>
+                            <DataGridTextColumn Header="Пригласивший" Width="auto" Binding="{Binding ARManager.ARManagerID}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
                 </Grid>
             </TabItem>
-            <TabItem Header="Редактировать">
+            <TabItem Header="Музыка">
                 <Grid>
-                    <TabControl>
-                        <TabItem Header="Исполнители">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-                                <Grid Grid.Column="0" Margin="15,15,15,51">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding ElementName=PersonGrid, Path=Columns[0].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding ElementName=PersonGrid, Path=Columns[1].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding ElementName=PersonGrid, Path=Columns[2].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding ElementName=PersonGrid, Path=Columns[3].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="4" Text="{Binding ElementName=PersonGrid, Path=Columns[4].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="5" Text="{Binding ElementName=PersonGrid, Path=Columns[5].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="6" Text="{Binding ElementName=PersonGrid, Path=Columns[6].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                    <Grid Grid.Column="0" Margin="15,15,15,51">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
 
-                                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding SelectedPersons.PersonID}" Margin="5"/>
-                                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SelectedPersons.PersonNickname}" Margin="5"/>
-                                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding SelectedPersons.PersonFirstname}" Margin="5"/>
-                                    <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding SelectedPersons.PersonSecondname}" Margin="5"/>
-                                    <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding SelectedPersons.PersonContract}" Margin="5"/>
-                                    <CheckBox Grid.Column="1" Grid.Row="5" Content="{Binding SelectedPersons.PersonLabelMember}" IsChecked="{Binding SelectedPersons.PersonLabelMember}" Margin="5"/>
-                                    <ComboBox Name="ComboBoxARMID" IsSynchronizedWithCurrentItem="True" Grid.Column="1" Grid.Row="6" Margin="5,5,5,5" ItemsSource="{Binding ARManagers}" SelectedItem="{Binding SelectedPersons.ARManager}">
-                                        <ComboBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock>
-                                                    <TextBlock.Text>
-                                                        <MultiBinding StringFormat="{}{0} {1}">
-                                                            <Binding Path="Firstname"/>
-                                                            <Binding Path="Secondname"/>
-                                                        </MultiBinding>
-                                                    </TextBlock.Text>
-                                                </TextBlock>
-                                            </DataTemplate>
-                                        </ComboBox.ItemTemplate>
-                                    </ComboBox>
-                                </Grid>
-                                <Button Margin="15,0,15,10" Content="Добавить" Command="{Binding AddPersonButton}" Height="25" VerticalAlignment="Bottom"/>
-                                <DataGrid Name="PersonGrid" Grid.Column="1" Margin="0,10,10,10" AutoGenerateColumns="False" ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedPersons}">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="ID" Width="auto" Binding="{Binding PersonID}"/>
-                                        <DataGridTextColumn Header="Псевдоним" Width="auto" Binding="{Binding PersonNickname}"/>
-                                        <DataGridTextColumn Header="Имя" Width="auto" Binding="{Binding PersonFirstname}"/>
-                                        <DataGridTextColumn Header="Фамилия" Width="auto" Binding="{Binding PersonSecondname}"/>
-                                        <DataGridTextColumn Header="Контакт" Width="auto" Binding="{Binding PersonContract}"/>
-                                        <DataGridCheckBoxColumn Header="Участник лейбла" Width="auto" Binding="{Binding PersonLabelMember}"/>
-                                        <DataGridTextColumn Header="Пригласивший" Width="auto" Binding="{Binding ARManager.ARManagerID}"/>
-                                    </DataGrid.Columns>
-                                </DataGrid>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding ElementName=MusicGrid, Path=Columns[0].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding ElementName=MusicGrid, Path=Columns[1].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding ElementName=MusicGrid, Path=Columns[2].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding ElementName=MusicGrid, Path=Columns[3].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="4" Text="{Binding ElementName=MusicGrid, Path=Columns[4].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="5" Text="{Binding ElementName=MusicGrid, Path=Columns[5].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="6" Text="{Binding ElementName=MusicGrid, Path=Columns[6].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="7" Text="{Binding ElementName=MusicGrid, Path=Columns[7].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="8" Text="{Binding ElementName=MusicGrid, Path=Columns[8].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="9" Text="{Binding ElementName=MusicGrid, Path=Columns[9].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="10" Text="{Binding ElementName=MusicGrid, Path=Columns[10].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="11" Text="{Binding ElementName=MusicGrid, Path=Columns[11].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
 
-                            </Grid>
-                        </TabItem>
-                        <TabItem Header="Музыка">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding SelectedMusics.TrackID}" Margin="5"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SelectedMusics.TrackTitle}" Margin="5"/>
+                        <ComboBox Grid.Column="1" Grid.Row="2" Margin="5,5,5,5" ItemsSource="{Binding Prices}" SelectedItem="{Binding SelectedMusics.Price}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0}$">
+                                                <Binding Path="PriceSize"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <ComboBox Grid.Column="1" Grid.Row="3" Margin="5,5,5,5" ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedMusics.Person}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0}">
+                                                <Binding Path="PersonNickname"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding SelectedMusics.Expens}" Margin="5"/>
+                        <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding SelectedMusics.TrackCountAudition}" Margin="5"/>
+                        <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding SelectedMusics.TrackCountSell}" Margin="5"/>
+                        <DatePicker Grid.Column="1" Grid.Row="7" SelectedDateFormat="Long" SelectedDate="{Binding SelectedMusics.TrackDataRec}" Margin="5" FirstDayOfWeek="Monday" DisplayDateStart="2000-01-01"/>
+                        <DatePicker Grid.Column="1" Grid.Row="8" SelectedDateFormat="Long" SelectedDate="{Binding SelectedMusics.TrackDataRealise}" Margin="5" FirstDayOfWeek="Monday" DisplayDateStart="2000-01-01"/>
+                        <CheckBox Grid.Column="1" Grid.Row="9" Content="{Binding SelectedMusics.EnableRadio}" IsChecked="{Binding SelectedMusics.EnableRadio}" Margin="5"/>
+                        <CheckBox Grid.Column="1" Grid.Row="10" Content="{Binding SelectedMusics.PresenceInStore}" IsChecked="{Binding SelectedMusics.PresenceInStore}" Margin="5"/>
+                        <ComboBox Grid.Column="1" Grid.Row="11" Margin="5,5,5,5" ItemsSource="{Binding ContractWithLabels}" SelectedItem="{Binding SelectedMusics.CWL}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0}">
+                                                <Binding Path="NameLabel"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+                    <Button Margin="15,0,15,10" Content="Добавить" Height="25" VerticalAlignment="Bottom" Command="{Binding AddMusicButton}"/>
+                    <DataGrid Name="MusicGrid" Grid.Column="1" Margin="0,10,10,10" AutoGenerateColumns="False" ItemsSource="{Binding Musics}" SelectedItem="{Binding SelectedMusics}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Width="auto" Binding="{Binding TrackID}"/>
+                            <DataGridTextColumn Header="Название" Width="auto" Binding="{Binding TrackTitle}"/>
+                            <DataGridTextColumn Header="Стоимость" Width="auto" Binding="{Binding Price.PriceID}"/>
+                            <DataGridTextColumn Header="Исполнитель" Width="auto" Binding="{Binding Person.PersonID}"/>
+                            <DataGridTextColumn Header="Затраты" Width="auto" Binding="{Binding Expens}"/>
+                            <DataGridTextColumn Header="Кол-во прослушиваний" Width="auto" Binding="{Binding TrackCountAudition}"/>
+                            <DataGridTextColumn Header="Кол-во продаж" Width="auto" Binding="{Binding TrackCountSell}"/>
+                            <DataGridTextColumn Header="Дата записи" Width="auto" Binding="{Binding TrackDataRec, StringFormat='dd/MM/yyyy'}"/>
+                            <DataGridTextColumn Header="Дата релиза" Width="auto" Binding="{Binding TrackDataRealise, StringFormat='dd/MM/yyyy'}"/>
+                            <DataGridCheckBoxColumn Header="Звучит на радио" Width="auto" Binding="{Binding EnableRadio}"/>
+                            <DataGridCheckBoxColumn Header="Продается" Width="auto" Binding="{Binding PresenceInStore}"/>
+                            <DataGridTextColumn Header="Внешние контракты" Width="auto" Binding="{Binding CWL.ContractWithLabelID}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Внутренние контракты">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Margin="15,15,15,51">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[0].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[1].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[2].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[3].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="4" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[4].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="5" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[5].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="6" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[6].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="7" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[7].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
 
-                                <Grid Grid.Column="0" Margin="15,15,15,51">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                    </Grid.RowDefinitions>
+                        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding SelectedContractWithPersons.ContractWithPersonID}" Margin="5"/>
+                        <ComboBox Grid.Column="1" Grid.Row="1" Margin="5,5,5,5" ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedContractWithPersons.Person}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0}">
+                                                <Binding Path="PersonNickname"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <CheckBox Grid.Column="1" Grid.Row="2" Content="{Binding SelectedContractWithPersons.ContractWithPersonEnable}" IsChecked="{Binding SelectedContractWithPersons.ContractWithPersonEnable}" Margin="5"/>
+                        <DatePicker Grid.Column="1" Grid.Row="3" SelectedDateFormat="Long" SelectedDate="{Binding SelectedContractWithPersons.ContractWithPersonDateOfSingle}" Margin="5" FirstDayOfWeek="Monday" DisplayDateStart="2000-01-01"/>
+                        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding  SelectedContractWithPersons.ContractWithPersonCountTrackUnder}" Margin="5"/>
+                        <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding SelectedContractWithPersons.CountrackWithPersonCountReadyTrack}" Margin="5"/>
+                        <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding SelectedContractWithPersons.ContractWithPersonPrice}" Margin="5"/>
+                        <DatePicker Grid.Column="1" Grid.Row="7" SelectedDateFormat="Long" SelectedDate="{Binding SelectedContractWithPersons.DateDeadLine}" Margin="5" FirstDayOfWeek="Monday" DisplayDateStart="2000-01-01"/>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding ElementName=MusicGrid, Path=Columns[0].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding ElementName=MusicGrid, Path=Columns[1].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding ElementName=MusicGrid, Path=Columns[2].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding ElementName=MusicGrid, Path=Columns[3].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="4" Text="{Binding ElementName=MusicGrid, Path=Columns[4].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="5" Text="{Binding ElementName=MusicGrid, Path=Columns[5].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="6" Text="{Binding ElementName=MusicGrid, Path=Columns[6].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="7" Text="{Binding ElementName=MusicGrid, Path=Columns[7].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="8" Text="{Binding ElementName=MusicGrid, Path=Columns[8].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="9" Text="{Binding ElementName=MusicGrid, Path=Columns[9].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="10" Text="{Binding ElementName=MusicGrid, Path=Columns[10].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="11" Text="{Binding ElementName=MusicGrid, Path=Columns[11].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                    </Grid>
+                    <Button Margin="15,0,15,10" Content="Добавить" Height="25" VerticalAlignment="Bottom" Command="{Binding AddContractWithPerson}"/>
+                    <DataGrid Name="ContractWithPersonGrid" Grid.Column="1" Margin="0,10,10,10" AutoGenerateColumns="False" ItemsSource="{Binding ContractWithPersons}" SelectedItem="{Binding SelectedContractWithPersons}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Width="auto" Binding="{Binding ContractWithPersonID}"/>
+                            <DataGridTextColumn Header="Подписан" Width="auto" Binding="{Binding Person.PersonID}"/>
+                            <DataGridCheckBoxColumn Header="Действителен" Width="auto" Binding="{Binding ContractWithPersonEnable}"/>
+                            <DataGridTextColumn Header="Дата подписания" Width="auto" Binding="{Binding ContractWithPersonDateOfSingle, StringFormat='dd/MM/yyyy'}"/>
+                            <DataGridTextColumn Header="Кол-во треков" Width="auto" Binding="{Binding ContractWithPersonCountTrackUnder}"/>
+                            <DataGridTextColumn Header="Кол-во готовых треков" Width="auto" Binding="{Binding CountrackWithPersonCountReadyTrack}"/>
+                            <DataGridTextColumn Header="Цена контракта" Width="auto" Binding="{Binding ContractWithPersonPrice}"/>
+                            <DataGridTextColumn Header="Дата окончания" Width="auto" Binding="{Binding DateDeadLine, StringFormat='dd/MM/yyyy'}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Внешние контракты">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Margin="15,15,15,51" DataContext="{Binding SelectedContractWithLabel}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
 
-                                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding SelectedMusics.TrackID}" Margin="5"/>
-                                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SelectedMusics.TrackTitle}" Margin="5"/>
-                                    <ComboBox Grid.Column="1" Grid.Row="2" Margin="5,5,5,5" ItemsSource="{Binding Prices}" SelectedItem="{Binding SelectedMusics.Price}">
-                                        <ComboBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock>
-                                                    <TextBlock.Text>
-                                                        <MultiBinding StringFormat="{}{0}$">
-                                                            <Binding Path="PriceSize"/>
-                                                        </MultiBinding>
-                                                    </TextBlock.Text>
-                                                </TextBlock>
-                                            </DataTemplate>
-                                        </ComboBox.ItemTemplate>
-                                    </ComboBox>
-                                    <ComboBox Grid.Column="1" Grid.Row="3" Margin="5,5,5,5" ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedMusics.Person}">
-                                        <ComboBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock>
-                                                    <TextBlock.Text>
-                                                        <MultiBinding StringFormat="{}{0}">
-                                                            <Binding Path="PersonNickname"/>
-                                                        </MultiBinding>
-                                                    </TextBlock.Text>
-                                                </TextBlock>
-                                            </DataTemplate>
-                                        </ComboBox.ItemTemplate>
-                                    </ComboBox>
-                                    <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding SelectedMusics.Expens}" Margin="5"/>
-                                    <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding SelectedMusics.TrackCountAudition}" Margin="5"/>
-                                    <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding SelectedMusics.TrackCountSell}" Margin="5"/>
-                                    <DatePicker Grid.Column="1" Grid.Row="7" SelectedDateFormat="Long" SelectedDate="{Binding SelectedMusics.TrackDataRec}" Margin="5" FirstDayOfWeek="Monday" DisplayDateStart="2000-01-01"/>
-                                    <DatePicker Grid.Column="1" Grid.Row="8" SelectedDateFormat="Long" SelectedDate="{Binding SelectedMusics.TrackDataRealise}" Margin="5" FirstDayOfWeek="Monday" DisplayDateStart="2000-01-01"/>
-                                    <CheckBox Grid.Column="1" Grid.Row="9" Content="{Binding SelectedMusics.EnableRadio}" IsChecked="{Binding SelectedMusics.EnableRadio}" Margin="5"/>
-                                    <CheckBox Grid.Column="1" Grid.Row="10" Content="{Binding SelectedMusics.PresenceInStore}" IsChecked="{Binding SelectedMusics.PresenceInStore}" Margin="5"/>
-                                    <ComboBox Grid.Column="1" Grid.Row="11" Margin="5,5,5,5" ItemsSource="{Binding ContractWithLabels}" SelectedItem="{Binding SelectedMusics.CWL}">
-                                        <ComboBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock>
-                                                    <TextBlock.Text>
-                                                        <MultiBinding StringFormat="{}{0}">
-                                                            <Binding Path="NameLabel"/>
-                                                        </MultiBinding>
-                                                    </TextBlock.Text>
-                                                </TextBlock>
-                                            </DataTemplate>
-                                        </ComboBox.ItemTemplate>
-                                    </ComboBox>
-                                </Grid>
-                                <Button Margin="15,0,15,10" Content="Добавить" Height="25" VerticalAlignment="Bottom" Command="{Binding AddMusicButton}"/>
-                                <DataGrid Name="MusicGrid" Grid.Column="1" Margin="0,10,10,10" AutoGenerateColumns="False" ItemsSource="{Binding Musics}" SelectedItem="{Binding SelectedMusics}">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="ID" Width="auto" Binding="{Binding TrackID}"/>
-                                        <DataGridTextColumn Header="Название" Width="auto" Binding="{Binding TrackTitle}"/>
-                                        <DataGridTextColumn Header="Стоимость" Width="auto" Binding="{Binding Price.PriceID}"/>
-                                        <DataGridTextColumn Header="Исполнитель" Width="auto" Binding="{Binding Person.PersonID}"/>
-                                        <DataGridTextColumn Header="Затраты" Width="auto" Binding="{Binding Expens}"/>
-                                        <DataGridTextColumn Header="Кол-во прослушиваний" Width="auto" Binding="{Binding TrackCountAudition}"/>
-                                        <DataGridTextColumn Header="Кол-во продаж" Width="auto" Binding="{Binding TrackCountSell}"/>
-                                        <DataGridTextColumn Header="Дата записи" Width="auto" Binding="{Binding TrackDataRec, StringFormat='dd/MM/yyyy'}"/>
-                                        <DataGridTextColumn Header="Дата релиза" Width="auto" Binding="{Binding TrackDataRealise, StringFormat='dd/MM/yyyy'}"/>
-                                        <DataGridCheckBoxColumn Header="Звучит на радио" Width="auto" Binding="{Binding EnableRadio}"/>
-                                        <DataGridCheckBoxColumn Header="Продается" Width="auto" Binding="{Binding PresenceInStore}"/>
-                                        <DataGridTextColumn Header="Внешние контракты" Width="auto" Binding="{Binding CWL.ContractWithLabelID}"/>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </Grid>
-                        </TabItem>
-                        <TabItem Header="Внутренние контракты">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0" Margin="15,15,15,51">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[0].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[1].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[2].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[3].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="4" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[4].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="5" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[5].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="6" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[6].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="7" Text="{Binding ElementName=ContractWithPersonGrid, Path=Columns[7].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding ElementName=ContractWithLabelGrid, Path=Columns[0].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding ElementName=ContractWithLabelGrid, Path=Columns[1].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding ElementName=ContractWithLabelGrid, Path=Columns[2].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding ElementName=ContractWithLabelGrid, Path=Columns[3].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="4" Text="{Binding ElementName=ContractWithLabelGrid, Path=Columns[4].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
 
-                                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding SelectedContractWithPersons.ContractWithPersonID}" Margin="5"/>
-                                    <ComboBox Grid.Column="1" Grid.Row="1" Margin="5,5,5,5" ItemsSource="{Binding Persons}" SelectedItem="{Binding SelectedContractWithPersons.Person}">
-                                        <ComboBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock>
-                                                    <TextBlock.Text>
-                                                        <MultiBinding StringFormat="{}{0}">
-                                                            <Binding Path="PersonNickname"/>
-                                                        </MultiBinding>
-                                                    </TextBlock.Text>
-                                                </TextBlock>
-                                            </DataTemplate>
-                                        </ComboBox.ItemTemplate>
-                                    </ComboBox>
-                                    <CheckBox Grid.Column="1" Grid.Row="2" Content="{Binding SelectedContractWithPersons.ContractWithPersonEnable}" IsChecked="{Binding SelectedContractWithPersons.ContractWithPersonEnable}" Margin="5"/>
-                                    <DatePicker Grid.Column="1" Grid.Row="3" SelectedDateFormat="Long" SelectedDate="{Binding SelectedContractWithPersons.ContractWithPersonDateOfSingle}" Margin="5" FirstDayOfWeek="Monday" DisplayDateStart="2000-01-01"/>
-                                    <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding  SelectedContractWithPersons.ContractWithPersonCountTrackUnder}" Margin="5"/>
-                                    <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding SelectedContractWithPersons.CountrackWithPersonCountReadyTrack}" Margin="5"/>
-                                    <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding SelectedContractWithPersons.ContractWithPersonPrice}" Margin="5"/>
-                                    <DatePicker Grid.Column="1" Grid.Row="7" SelectedDateFormat="Long" SelectedDate="{Binding SelectedContractWithPersons.DateDeadLine}" Margin="5" FirstDayOfWeek="Monday" DisplayDateStart="2000-01-01"/>
+                        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding ContractWithLabelID}" Margin="5"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding NameLabel}" Margin="5"/>
+                        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding PriceContract}" Margin="5"/>
+                        <DatePicker Grid.Column="1" Grid.Row="3" SelectedDateFormat="Long" SelectedDate="{Binding ContractWithLabelDataOfSingle}" Margin="5" FirstDayOfWeek="Monday" DisplayDateStart="2000-01-01"/>
+                        <DatePicker Grid.Column="1" Grid.Row="4" SelectedDateFormat="Long" SelectedDate="{Binding ContractWithLabelDataDeadline}" Margin="5" FirstDayOfWeek="Monday" DisplayDateStart="2000-01-01"/>
 
-                                </Grid>
-                                <Button Margin="15,0,15,10" Content="Добавить" Height="25" VerticalAlignment="Bottom" Command="{Binding AddContractWithPerson}"/>
-                                <DataGrid Name="ContractWithPersonGrid" Grid.Column="1" Margin="0,10,10,10" AutoGenerateColumns="False" ItemsSource="{Binding ContractWithPersons}" SelectedItem="{Binding SelectedContractWithPersons}">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="ID" Width="auto" Binding="{Binding ContractWithPersonID}"/>
-                                        <DataGridTextColumn Header="Подписан" Width="auto" Binding="{Binding Person.PersonID}"/>
-                                        <DataGridCheckBoxColumn Header="Действителен" Width="auto" Binding="{Binding ContractWithPersonEnable}"/>
-                                        <DataGridTextColumn Header="Дата подписания" Width="auto" Binding="{Binding ContractWithPersonDateOfSingle, StringFormat='dd/MM/yyyy'}"/>
-                                        <DataGridTextColumn Header="Кол-во треков" Width="auto" Binding="{Binding ContractWithPersonCountTrackUnder}"/>
-                                        <DataGridTextColumn Header="Кол-во готовых треков" Width="auto" Binding="{Binding CountrackWithPersonCountReadyTrack}"/>
-                                        <DataGridTextColumn Header="Цена контракта" Width="auto" Binding="{Binding ContractWithPersonPrice}"/>
-                                        <DataGridTextColumn Header="Дата окончания" Width="auto" Binding="{Binding DateDeadLine, StringFormat='dd/MM/yyyy'}"/>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </Grid>
-                        </TabItem>
-                        <TabItem Header="Внешние контракты">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0" Margin="15,15,15,51" DataContext="{Binding SelectedContractWithLabel}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                    </Grid.RowDefinitions>
+                    </Grid>
+                    <Button Margin="15,0,15,10" Content="Добавить" Height="25" VerticalAlignment="Bottom" Command="{Binding AddContractWithLabel}"/>
+                    <DataGrid Grid.Column="1" AutoGenerateColumns="False" Name="ContractWithLabelGrid" Margin="0,10,10,10" ItemsSource="{Binding ContractWithLabels}" SelectedItem="{Binding SelectedContractWithLabel}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Width="auto" Binding="{Binding ContractWithLabelID}"/>
+                            <DataGridTextColumn Header="Подписан" Width="auto" Binding="{Binding NameLabel}"/>
+                            <DataGridTextColumn Header="Стоимость ареды" Width="auto" Binding="{Binding PriceContract}"/>
+                            <DataGridTextColumn Header="Дата подписания" Width="auto" Binding="{Binding ContractWithLabelDataOfSingle, StringFormat='dd/MM/yyyy'}"/>
+                            <DataGridTextColumn Header="Дата окончания" Width="auto" Binding="{Binding ContractWithLabelDataDeadline, StringFormat='dd/MM/yyyy'}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="AR Менеджеры">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding ElementName=ContractWithLabelGrid, Path=Columns[0].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding ElementName=ContractWithLabelGrid, Path=Columns[1].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding ElementName=ContractWithLabelGrid, Path=Columns[2].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding ElementName=ContractWithLabelGrid, Path=Columns[3].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="4" Text="{Binding ElementName=ContractWithLabelGrid, Path=Columns[4].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                    <Grid Grid.Column="0" Margin="15,15,15,51" DataContext="{Binding SelectedARManager}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
 
-                                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding ContractWithLabelID}" Margin="5"/>
-                                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding NameLabel}" Margin="5"/>
-                                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding PriceContract}" Margin="5"/>
-                                    <DatePicker Grid.Column="1" Grid.Row="3" SelectedDateFormat="Long" SelectedDate="{Binding ContractWithLabelDataOfSingle}" Margin="5" FirstDayOfWeek="Monday" DisplayDateStart="2000-01-01"/>
-                                    <DatePicker Grid.Column="1" Grid.Row="4" SelectedDateFormat="Long" SelectedDate="{Binding ContractWithLabelDataDeadline}" Margin="5" FirstDayOfWeek="Monday" DisplayDateStart="2000-01-01"/>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding ElementName=ARManagerGrid, Path=Columns[0].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding ElementName=ARManagerGrid, Path=Columns[1].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding ElementName=ARManagerGrid, Path=Columns[2].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
 
-                                </Grid>
-                                <Button Margin="15,0,15,10" Content="Добавить" Height="25" VerticalAlignment="Bottom" Command="{Binding AddContractWithLabel}"/>
-                                <DataGrid Grid.Column="1" AutoGenerateColumns="False" Name="ContractWithLabelGrid" Margin="0,10,10,10" ItemsSource="{Binding ContractWithLabels}" SelectedItem="{Binding SelectedContractWithLabel}">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="ID" Width="auto" Binding="{Binding ContractWithLabelID}"/>
-                                        <DataGridTextColumn Header="Подписан" Width="auto" Binding="{Binding NameLabel}"/>
-                                        <DataGridTextColumn Header="Стоимость ареды" Width="auto" Binding="{Binding PriceContract}"/>
-                                        <DataGridTextColumn Header="Дата подписания" Width="auto" Binding="{Binding ContractWithLabelDataOfSingle, StringFormat='dd/MM/yyyy'}"/>
-                                        <DataGridTextColumn Header="Дата окончания" Width="auto" Binding="{Binding ContractWithLabelDataDeadline, StringFormat='dd/MM/yyyy'}"/>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </Grid>
-                        </TabItem>
-                        <TabItem Header="AR Менеджеры">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding ARManagerID}" Margin="5"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Firstname}" Margin="5"/>
+                        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Secondname}" Margin="5"/>
+                    </Grid>
+                    <Button Margin="15,0,15,10" Content="Добавить" Height="25" VerticalAlignment="Bottom" Command="{Binding AddARManButton}"/>
+                    <DataGrid Grid.Column="1" Name="ARManagerGrid" AutoGenerateColumns="False" Margin="0,10,10,10" ItemsSource="{Binding ARManagers}" SelectedItem="{Binding SelectedARManager}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Width="auto" Binding="{Binding ARManagerID}"/>
+                            <DataGridTextColumn Header="Имя" Width="auto" Binding="{Binding Firstname}"/>
+                            <DataGridTextColumn Header="Фамилия" Width="auto" Binding="{Binding Secondname}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Цена треков">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-                                <Grid Grid.Column="0" Margin="15,15,15,51" DataContext="{Binding SelectedARManager}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Margin="15,15,15,51" DataContext="{Binding SelectedPrices}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding ElementName=PriceGrid, Path=Columns[0].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding ElementName=PriceGrid, Path=Columns[1].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding ElementName=ARManagerGrid, Path=Columns[0].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding ElementName=ARManagerGrid, Path=Columns[1].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding ElementName=ARManagerGrid, Path=Columns[2].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-
-                                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding ARManagerID}" Margin="5"/>
-                                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Firstname}" Margin="5"/>
-                                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Secondname}" Margin="5"/>
-                                </Grid>
-                                <Button Margin="15,0,15,10" Content="Добавить" Height="25" VerticalAlignment="Bottom" Command="{Binding AddARManButton}"/>
-                                <DataGrid Grid.Column="1" Name="ARManagerGrid" AutoGenerateColumns="False" Margin="0,10,10,10" ItemsSource="{Binding ARManagers}" SelectedItem="{Binding SelectedARManager}">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="ID" Width="auto" Binding="{Binding ARManagerID}"/>
-                                        <DataGridTextColumn Header="Имя" Width="auto" Binding="{Binding Firstname}"/>
-                                        <DataGridTextColumn Header="Фамилия" Width="auto" Binding="{Binding Secondname}"/>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </Grid>
-                        </TabItem>
-                        <TabItem Header="Цена треков">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-
-                                <Grid Grid.Column="0" Margin="15,15,15,51" DataContext="{Binding SelectedPrices}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding ElementName=PriceGrid, Path=Columns[0].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding ElementName=PriceGrid, Path=Columns[1].Header, StringFormat={}{0}: }" Height="25" Margin="5" TextAlignment="Right"/>
-
-                                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding PriceID}" Margin="5"/>
-                                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding PriceSize}" Margin="5"/>
-                                </Grid>
-                                <Button Margin="15,0,15,10" Content="Добавить" Height="25" VerticalAlignment="Bottom" Command="{Binding AddPriceButton}"/>
-                                <DataGrid Grid.Column="1" Name="PriceGrid" Margin="0,10,10,10" AutoGenerateColumns="False" ItemsSource="{Binding Prices}" SelectedItem="{Binding SelectedPrices}">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="ID" Width="auto" Binding="{Binding PriceID}"/>
-                                        <DataGridTextColumn Header="Размер стоимости" Width="auto" Binding="{Binding PriceSize}"/>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </Grid>
-                        </TabItem>
-                    </TabControl>
+                        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding PriceID}" Margin="5"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding PriceSize}" Margin="5"/>
+                    </Grid>
+                    <Button Margin="15,0,15,10" Content="Добавить" Height="25" VerticalAlignment="Bottom" Command="{Binding AddPriceButton}"/>
+                    <DataGrid Grid.Column="1" Name="PriceGrid" Margin="0,10,10,10" AutoGenerateColumns="False" ItemsSource="{Binding Prices}" SelectedItem="{Binding SelectedPrices}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Width="auto" Binding="{Binding PriceID}"/>
+                            <DataGridTextColumn Header="Размер стоимости" Width="auto" Binding="{Binding PriceSize}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>
